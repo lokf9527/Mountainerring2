@@ -46,7 +46,7 @@ export default {
                         <h4>水鹿的故鄉：能高安東軍縱走 ― 大北三段</h4>
                         <p>中央山脈主脊北三段，北自大禹嶺，一路向南經過奇萊北壁、奇萊連峰、能高安東軍，然後再往南穿越魔王草山摩即後，抵達七彩湖。知名的進階路線一奇萊東稜及千卓萬群峰，正是分屬此處東西支稜。而一般口語上會將能高安東軍稱為「北三段」，實際上能安縱走只佔其中一段。
                         </p>
-                        <button class="btn btn-outline-light " type="button">查看更多</button>
+                        <RouterLink class="btn btn-outline-light" to="/product/-NN0TN0Oy7quf2LBeINs">查看更多</RouterLink>
                     </div>
                 </div>
                 <!-- <img style="z-index: 1; " src="../stylesheets/shoes.jpg" alt=""> -->
