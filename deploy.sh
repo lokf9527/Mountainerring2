@@ -25,6 +25,6 @@ git commit -m 'deploy'
 # git push -f git@github.com:lokf9527/lokf9527.github.io.git main
 
 # if you are deploying to https://lokf9527.github.io/mountainerring
-git push -f https://github.com/lokf9527/Mountainerring.git main:gh-pages
+git push -f https://github.com/lokf9527/Mountainerring2.git main:gh-pages
 
 cd -
