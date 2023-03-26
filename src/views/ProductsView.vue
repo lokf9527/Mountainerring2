@@ -26,10 +26,10 @@ export default {
           case"初階體驗":
           case"中階探索":
           case"高階冒險":
-            url=`${VITE_URL}v2/api/${VITE_PATH}/products?category=${category}`
+            url=`${VITE_URL}/v2/api/${VITE_PATH}/products?category=${category}`
             break;
             default:
-            url=`${VITE_URL}v2/api/${VITE_PATH}/products`;
+            url=`${VITE_URL}/v2/api/${VITE_PATH}/products`;
         }
         this.$http(url)
           .then(res => {
@@ -97,11 +97,9 @@ export default {
                             <a href="#" class="text-dark">
                                 <i class="far fa-heart position-absolute" style="right: 16px; top: 16px"></i>
                             </a>
-                            
                             <div class="card-body p-0">
                                 <h4 class="mb-0 mt-3">
-                                    <RouterLink :to="`/product/${product.id}`">{{ product.title}}</RouterLink>
-                                    <a href="./detail.html"></a></h4>
+                                    <RouterLink :to="`/product/${product.id}`">{{ product.title}}</RouterLink></h4>
                                 <p class="card-text mb-0">NT${{product.price}}</p>
                                 <p class="text-muted mt-3"></p>
                             </div>

@@ -27,7 +27,7 @@ export default {
 }
 </script>
 <template>
-    <div class="container ">
+    <div class="container">
         <div class="mt-3">
             <h3 class="mt-3 mb-4">購物車</h3>
             <div class="row">

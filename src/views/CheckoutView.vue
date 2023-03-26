@@ -50,7 +50,8 @@ export default {
 };
 </script>
 <template>
-  <div class="my-5 mx-1 row justify-content-center w-100">
+  <div class="container">
+    <div class="my-5 mx-1 row justify-content-center w-100">
         <div class="col-md-6">
     <form @submit.prevent="payOrder">
       <div class="card rounded-0 py-4 mb-3">
@@ -157,4 +158,6 @@ export default {
     </div>
   </div>
     </div>
+  </div>
+  
 </template>

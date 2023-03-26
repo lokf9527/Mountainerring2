@@ -8,6 +8,8 @@ export default {
   data () {
     return {
       product: {},
+      relativePorduct: {},
+      id: "",
       qty: 1,
     }
   },
@@ -17,12 +19,20 @@ export default {
       this.$http.get(`${VITE_URL}/v2/api/${VITE_PATH}/product/${id}`)
         .then(res=>{
             this.product = res.data.product
+            this.getRelativeProducts()
         })
     },
-    addOne(){
+    getRelativeProducts () {
+      const {category, id} =this.product
+      this.$http.get(`${VITE_URL}/v2/api/${VITE_PATH}/products?category=${category}`)
+        .then(res=>{
+            this.relativePorduct = res.data.products.filter((item) => item.id !== id)
+        })
+    },
+    addOne () {
         this.qty+=1
     },
-    minusOne(){
+    minusOne () {
         if (this.qty>1){
             this.qty-=1
         }  
@@ -32,6 +42,14 @@ export default {
   components: {
     RouterLink
   },
+  watch: {
+  '$route.params': {
+    immediate: true,
+    handler() {
+      this.getProduct();
+    },
+  },
+},
   mounted () {
     this.getProduct()
   }
@@ -96,6 +114,26 @@ export default {
                 <p>{{ product.content}}</p>
             </div>
         </div>
-        
+        <hr>
+        <h3 class="fw-bold mt-4">相關行程</h3>
+        <div class="container">
+            <div class="row  mt-4 mb-5" >
+                <div class="col-lg-3 col-md-6" v-for="item in relativePorduct" :key="item.id">
+                    <div class="card border-0 mb-4 h-100">
+                        <RouterLink :to="`/product/${item.id}`">
+                            <img :src="item.imageUrl" class="card-img-top rounded-0" :alt="item.title" />
+                        </RouterLink>   
+                        <div class="card-body text-start">
+                        <h5>{{ item.title }}</h5> 
+                        <div class="d-flex justify-content-between">
+                            <p class="card-text text-muted mb-0 h6">
+                                NT${{ item.price }}
+                            </p>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
