@@ -43,13 +43,13 @@ export default {
     RouterLink
   },
   watch: {
-  '$route.params': {
-    immediate: true,
-    handler() {
-      this.getProduct();
+    '$route.params': {
+      immediate: true,
+      handler() {
+        this.getProduct();
+      },
     },
   },
-},
   mounted () {
     this.getProduct()
   }
@@ -121,7 +121,7 @@ export default {
                 <div class="col-lg-3 col-md-6" v-for="item in relativePorduct" :key="item.id">
                     <div class="card border-0 mb-4 h-100">
                         <RouterLink :to="`/product/${item.id}`">
-                            <img :src="item.imageUrl" class="card-img-top rounded-0" :alt="item.title" />
+                            <img :src="item.imageUrl" class="card-img-top rounded-0" :alt="item.title"/>
                         </RouterLink>   
                         <div class="card-body text-start">
                         <h5>{{ item.title }}</h5> 
