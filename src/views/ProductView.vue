@@ -37,6 +37,11 @@ export default {
             this.qty-=1
         }  
     },
+    toggleId(id) {
+      this.$router.push(`/product/${id}`);
+      this.id = id;
+      this.getProduct();
+    },
     ...mapActions(cartStore, ["addToCart"]) 
   },
   components: {
