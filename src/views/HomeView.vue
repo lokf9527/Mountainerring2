@@ -1,26 +1,14 @@
 <script >
 import imageUrl from '@/assets/pic/banner.png';
-const { VITE_URL, VITE_PATH }  = import.meta.env
 export default {
   data(){
     return {
       imageUrl:imageUrl,
-      products:[]
     }
   },
   methods: {
-    getProduct () {
-        this.$http(`${VITE_URL}v2/api/${VITE_PATH}/products/all`)
-          .then((res) => {
-             this.products = res.data.products
-          })
-          .catch((err) => {
-            console.log(err)
-          })
-    }
   },
   mounted() {
-    this.getProduct()
   }
 }
 </script>

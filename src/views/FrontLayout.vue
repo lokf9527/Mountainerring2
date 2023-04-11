@@ -18,7 +18,8 @@ export default {
 }
 </script>
 <template>
-    <nav class="navbar navbar-expand-lg bg-primary">
+  <div></div>
+    <nav class="navbar navbar-expand-lg bg-primary ">
         <div class="container">
             <RouterLink to="/" class="navbar-brand text-white" style="font-family:Righteous;">MOUNTAINERRING</RouterLink>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
@@ -40,18 +41,51 @@ export default {
                 </span>
               </RouterLink>
             </div>
-          </div>
+            </div>
         </div>
     </nav>
 
     <RouterView></RouterView>
 
-    <footer class="py-5 bg-primary ">
+    <div class="footer py-5 bg-primary mt-auto">
         <div class="container">
             <div class="h5">Mountaineering</div>
             <p>Mountaineering@gmail.com (02) 1234-5678</p>
             <p>Copyright © Mountaineering All Rights Reserved. 此網站僅供作品展示用，無任何商業用途</p>
         </div>
-    </footer>
+    </div>
+    <!-- <div class="footer bg-black mt-auto">
+    <div class="container">
+      <div class="text-white py-4">
+        <div class="d-flex justify-content-center">
+          <ul class="d-flex list-unstyled mb-0">
+            <li class="nav-item me-2">
+              <RouterLink to="/products" class="nav-link text-light">
+                商品列表
+              </RouterLink>
+            </li>
+            <li class="nav-item me-2">
+              <RouterLink to="/about" class="nav-link text-light">
+                關於我們
+              </RouterLink>
+            </li>
+            <li class="nav-item me-2">
+              <RouterLink to="/information" class="nav-link text-light">
+                常見問題
+              </RouterLink>
+            </li>
+          </ul>
+        </div>
+        <div class="d-flex justify-content-center">
+          <p class="mb-0 text-center me-2">
+            <small>無商業用途，僅供學習使用</small>
+          </p>
+          <RouterLink to="/login" class="nav-link text-light">
+            <i class="bi bi-gear-fill"></i>
+          </RouterLink>
+        </div>
+      </div>
+    </div>
+  </div>  -->
 </template>
 

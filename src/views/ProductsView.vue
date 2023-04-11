@@ -1,5 +1,6 @@
 <script >
 import imageUrl from '@/assets/pic/banner.png';
+import Pagination from '@/components/PaginationView.vue'
 import { RouterLink } from "vue-router";
 const { VITE_URL, VITE_PATH }  = import.meta.env
 
@@ -7,21 +8,14 @@ export default {
   data(){
     return {
       imageUrl:imageUrl,
-      products:[]
+      products:[],
+      pagination: {},
+      currentPage: 1
     }
   },
   methods: {
-    // getProducts () {
-    //     this.$http(`${VITE_URL}v2/api/${VITE_PATH}/products/all`)
-    //       .then((res) => {
-    //          this.products = res.data.products
-    //       })
-    //       .catch((err) => {
-    //         console.log(err)
-    //       })
-    // },
-    getProducts (category) {
-        let url=`${VITE_URL}v2/api/${VITE_PATH}/products`;
+    getProducts (category,page = 1) {
+        let url=`${VITE_URL}v2/api/${VITE_PATH}/products/`;
         switch(category){
           case"初階體驗":
           case"中階探索":
@@ -29,17 +23,26 @@ export default {
             url=`${VITE_URL}/v2/api/${VITE_PATH}/products?category=${category}`
             break;
             default:
-            url=`${VITE_URL}/v2/api/${VITE_PATH}/products`;
+            url=`${VITE_URL}/v2/api/${VITE_PATH}/products?page=${page}`;
         }
         this.$http(url)
-          .then(res => {
-            this.products=res.data.products
-            // this.pagination = res.data.pagination
+          .then((res) => {
+            this.products = res.data.products
+            this.pagination = res.data.pagination
         })
-    }
+    },
+    updatePage(page=1){
+          let url=`${VITE_URL}/v2/api/${VITE_PATH}/products?page=${page}`;
+          this.$http(url)
+            .then(res=>{
+            this.products=res.data.products
+            this.pagination = res.data.pagination
+            })
+        },
   },
   components: {
-    RouterLink
+    RouterLink,
+    Pagination
   },
   mounted() {
     this.getProducts()
@@ -68,13 +71,13 @@ export default {
                         <div class="card-header px-0 py-4 bg-white border border-bottom-0 border-top border-start-0 border-end-0 rounded-0"
                             id="headingOne" data-bs-toggle="collapse" data-bs-target="#collapseOne">
                             <div class="d-flex justify-content-between align-items-center pe-1">
-                                <h4 class="mb-0" @click="() => getProducts('')">
+                                <h4 class="mb-0" style="cursor: pointer" @click="() => getProducts('')">
                                     全部商品
                                 </h4>
                                 <i class="fas fa-chevron-down"></i>
                             </div>
                         </div>
-                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                        <div id="collapseOne" class="collapse show " aria-labelledby="headingOne" style="cursor: pointer"
                             data-bs-parent="#accordionExample">
                             <div class="card-body py-0">
                                 <ul class="list-unstyled">
@@ -92,35 +95,24 @@ export default {
                 <div class="row">
                     <div class="col-md-4" v-for="product in products" :key="product.id">
                         <div class="card border-0 mb-4 position-relative position-relative">
-                            <img :src="product.imageUrl"
+                            <RouterLink :to="`/product/${product.id}`">
+                                <img :src="product.imageUrl"
                                 class="card-img-top rounded-0 object-fit-cover" :alt="product.title">
-                            <a href="#" class="text-dark">
+                            </RouterLink>
+                            <!-- <a href="#" class="text-dark">
                                 <i class="far fa-heart position-absolute" style="right: 16px; top: 16px"></i>
-                            </a>
+                            </a> -->
                             <div class="card-body p-0">
                                 <h4 class="mb-0 mt-3">
-                                    <RouterLink :to="`/product/${product.id}`">{{ product.title}}</RouterLink></h4>
+                                    <RouterLink :to="`/product/${product.id}`">{{ product.title}}</RouterLink>
+                                </h4>
                                 <p class="card-text mb-0">NT${{product.price}}</p>
                                 <p class="text-muted mt-3"></p>
                             </div>
                         </div>
                     </div>                   
                 </div>
-                <nav class="d-flex justify-content-center">
-                    <ul class="pagination">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
+                <Pagination :pages="pagination" @emit-pages="updatePage"></Pagination>
             </div>
         </div>
     </div>

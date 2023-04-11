@@ -120,9 +120,9 @@ export default {
             </div>
         </div>
         <hr>
-        <h3 class="fw-bold mt-4">相關行程</h3>
+        <h3 class="fw-bold">相關行程</h3>
         <div class="container">
-            <div class="row  mt-4 mb-5" >
+            <div class="row mt-4 mb-5" >
                 <div class="col-lg-3 col-md-6" v-for="item in relativePorduct" :key="item.id">
                     <div class="card border-0 mb-4 h-100">
                         <RouterLink :to="`/product/${item.id}`">
