@@ -14,8 +14,8 @@ export default {
 </script>
 
 <template>
-  <!-- banner -->
-  <header class="home-header" :style="{'background-image':`url(${imageUrl})`}">
+    <!-- banner -->
+    <header class="home-header" :style="{'background-image':`url(${imageUrl})`}">
         <div class="container d-flex justify-content-end align-items-center h-75 w-50 ">
             <div class="me-4" >
                 <h3 class="text-dark" style="font-family:Righteous;">MOUNTAINERRING</h3>
@@ -25,7 +25,7 @@ export default {
         </div>
     </header>
     <!-- 路線簡介 -->
-    <section>
+    <section class="">
         <div class="row g-0">
             <div class="col-md-5 bg-secondary d-flex align-items-center ">
                 <div class="container m-5">
@@ -104,7 +104,7 @@ export default {
     </section>
 
     <!-- 登山知識 -->
-    <section>
+    <section class="">
         <div class="row g-0 flex-row-reverse">
             <div class="col-md-6 bg-secondary d-flex align-items-center ">
                 <div class="container m-5">

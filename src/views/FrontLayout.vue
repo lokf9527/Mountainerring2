@@ -50,7 +50,7 @@ export default {
     <div class="footer py-5 bg-primary mt-auto">
         <div class="container">
             <div class="h5">Mountaineering</div>
-            <p>Mountaineering@gmail.com (02) 1234-5678</p>
+            <p><a>Mountaineering@gmail.com</a> (02) 1234-5678</p>
             <p>Copyright © Mountaineering All Rights Reserved. 此網站僅供作品展示用，無任何商業用途</p>
         </div>
     </div>
