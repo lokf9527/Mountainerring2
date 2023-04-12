@@ -71,10 +71,9 @@ export default {
                         <div class="card-header px-0 py-4 bg-white border border-bottom-0 border-top border-start-0 border-end-0 rounded-0"
                             id="headingOne" data-bs-toggle="collapse" data-bs-target="#collapseOne">
                             <div class="d-flex justify-content-between align-items-center pe-1">
-                                <h4 class="mb-0" style="cursor: pointer" @click="() => getProducts('')">
+                                <h4 class="mb-0 ms-6" style="cursor: pointer" @click="() => getProducts('')">
                                     全部商品
                                 </h4>
-                                <i class="fas fa-chevron-down"></i>
                             </div>
                         </div>
                         <div id="collapseOne" class="collapse show " aria-labelledby="headingOne" style="cursor: pointer"
@@ -91,10 +90,10 @@ export default {
                 </div>
             </div>
             <div class="col-md-9">
-                <h4 class="my-3">全部商品</h4>
+                <!-- <h4 class="my-3">全部商品</h4> -->
                 <div class="row">
                     <div class="col-md-4" v-for="product in products" :key="product.id">
-                        <div class="card border-0 mb-4 position-relative position-relative">
+                        <div class="card cardProducts border-0 rounded-0 mb-4  position-relative">
                             <RouterLink :to="`/product/${product.id}`">
                                 <img :src="product.imageUrl"
                                 class="card-img-top rounded-0 object-fit-cover" :alt="product.title">
@@ -102,12 +101,11 @@ export default {
                             <!-- <a href="#" class="text-dark">
                                 <i class="far fa-heart position-absolute" style="right: 16px; top: 16px"></i>
                             </a> -->
-                            <div class="card-body p-0">
-                                <h4 class="mb-0 mt-3">
+                            <div class="card-body text-start">
+                                <h4 class="mt-3 h5">
                                     <RouterLink :to="`/product/${product.id}`">{{ product.title}}</RouterLink>
                                 </h4>
-                                <p class="card-text mb-0">NT${{product.price}}</p>
-                                <p class="text-muted mt-3"></p>
+                                <p>NT${{product.price}}</p>
                             </div>
                         </div>
                     </div>                   

@@ -27,7 +27,7 @@ const cartStore = defineStore("cart", {
           qty,
         },
       };
-      axios.post(`${VITE_URL}/v2/api/${VITE_PATH}/cart`, data)
+      axios.post(`${VITE_URL}/v2/api/${VITE_PATH}/cart`, data )
         .then(() => {
           this.getCart()
         })

@@ -4,18 +4,22 @@ import { RouterLink } from "vue-router";
 import cartStore from "../stores/cart";
 
 
+
 export default {
     data(){
         return{
-            code:"",
+          code:"",
+          product: {},
+          id: "",
+          qty: 1,
         }
     },
     methods:{
       ...mapActions(cartStore, ["getCart","updateCart","deleteCart","deleteAllCart","addCouponCode"]),
     },
     computed: {
-        ...mapState(cartStore,["cart","total","final_total"]),
-        discount () {
+      ...mapState(cartStore,["cart","total","final_total"]),
+      discount () {
         return (this.total-this.final_total).toFixed(2)
     }
     },
@@ -103,16 +107,16 @@ export default {
                             </tbody>
                         </table>
                         <div class="input-group mb-3 input-group-sm">
-                            <input type="text" class="form-control" placeholder="請輸入優惠碼 VIP777" v-model="code"/>
+                            <input type="text" class="form-control"  placeholder="請輸入優惠碼 VIP777" v-model="code"/>
                             <div class="input-group-append">
-                                <button class="btn btn-outline-primary" type="button" @click="() => addCouponCode(code)">
+                                <button class="btn btn-outline-primary" style="border-top-left-radius:0%; border-bottom-left-radius:0%" type="button" @click="() => addCouponCode(code)">
                                     套用優惠碼
                                 </button>
                             </div>
                         </div>
                         <div class="d-flex justify-content-between mt-4">
                             <p class="mb-0 h4 fw-bold">總計</p>
-                            <p class="mb-0 h4 fw-bold">NT${{ final_total }}</p>
+                            <p class="mb-0 h4 fw-bold">NT${{ final_total-discount }}</p>
                         </div>
                         <!-- <a href="./checkout.html" class="btn btn-dark w-100 mt-4">前往結賬</a> -->
                         <RouterLink to="/form" class="btn btn-dark w-100 mt-4" >前往結帳</RouterLink>

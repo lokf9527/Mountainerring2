@@ -1,6 +1,9 @@
 <script>
+import { mapActions, mapState } from "pinia";
 import { RouterLink } from 'vue-router';
+import cartStore from "../stores/cart";
 const { VITE_URL, VITE_PATH } = import.meta.env;
+
 
 export default {
   data() {
@@ -36,12 +39,20 @@ export default {
         .then(() => {
           this.isLoading = false;
           this.getOrder();
+          this.getCart();
         })
         .catch((err) => {
           alert(err.data.message)
           this.isLoading = false;
         });
     },
+    ...mapActions(cartStore, ["getCart"]),
+  },
+  computed: {
+      ...mapState(cartStore,["cart","total","final_total"]),
+      discount () {
+        return (this.total-this.final_total).toFixed(2)
+    }
   },
   mounted() {
     this.orderId = this.$route.params.orderId;
@@ -115,7 +126,7 @@ export default {
           </ul>
         </div>
       </div>
-      <div class="card rounded-0 py-4">
+      <div class="card rounded-0 p-3">
         <table class="table">
           <tbody>
             <tr>
@@ -149,12 +160,12 @@ export default {
         class="d-flex mt-4 justify-content-between align-items-md-center align-items-end w-100"
         v-if="order.is_paid === false"
       >
-        <RouterLink to="/" class="btn btn-primary"> 回首頁 </RouterLink>
-        <button type="submit" class="btn btn-dark">確認付款</button>
+        <!-- <RouterLink to="/form" class="btn btn-primary"> 回上一頁 </RouterLink> -->
+        <button type="submit" class="btn btn-primary">確認付款</button>
       </div>
     </form>
     <div v-if="order.is_paid" class="text-end">
-      <RouterLink to="/" class="btn btn-dark me-2 my-4"> 回首頁 </RouterLink>
+      <RouterLink to="/" class="btn btn-primary me-2 my-4"> 回首頁 </RouterLink>
     </div>
   </div>
     </div>

@@ -32,7 +32,7 @@ const router = createRouter({
             component: () => import('../views/CheckoutView.vue'),
           },
           {
-            path:'checkoutSuccess',
+            path:'checkout_success',
             component: () => import('../views/checkoutSuccessView.vue'),
           }
         ]

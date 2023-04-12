@@ -35,7 +35,8 @@ export default {
         }
   },    
 
-  components: {RouterLink
+  components: {
+    RouterLink
   }
 }
 </script>
@@ -79,20 +80,13 @@ export default {
             </div>
             <div class="row">
                 <div class="text-start col">
-                    <!-- <button type="submit" class="btn btn-outline-primary">回購物車</button> -->
                     <RouterLink to="/cart" class="btn btn-danger">回購物車</RouterLink>
                 </div> 
                 <div class="text-end col">
-                    <button type="button" class="btn btn-primary" @click="() => createtOrder()">送出訂單</button>
-                    <!-- <RouterLink to="/checkoutSuccess" class="btn btn-danger">送出訂單</RouterLink> -->
+                    <button type="submit" class="btn btn-primary" @click="() => createtOrder()">送出訂單</button>
                 </div>
             </div>
-            <!-- <div class="text-end">
-                <button type="submit" class="btn btn-danger">送出訂單</button>
-                <RouterLink to="/checkoutSuccess" class="btn btn-danger">送出訂單</RouterLink>
-            </div> -->
         </v-form>
     </div>
     </div>
-    
 </template>

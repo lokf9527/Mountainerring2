@@ -27,7 +27,7 @@ export default {
     <!-- 路線簡介 -->
     <section class="">
         <div class="row g-0">
-            <div class="col-md-5 bg-secondary d-flex align-items-center ">
+            <div class="col-md-5 bg-secondary d-flex align-items-center text-white">
                 <div class="container m-5">
                     <div>
                         <h2 class="mb-5">路線<br>簡介</h2>
@@ -49,7 +49,7 @@ export default {
         <div class="row my-5">
             <h2 class="mb-5">最新<br>活動</h2>
             <div class="col-md-3">
-                <div class="card border-0 mb-4">
+                <div class="card cardProducts border-0 rounded-0 mb-4 ">
                     <RouterLink to="/product/-NN0TN0Oy7quf2LBeINs"><img src="https://greathunger.com.tw/images/images/activity2_20221202152957.jpg" class="card-img-top rounded-0" alt="能高安東軍縱走" /></RouterLink>
                     <div class="card-body text-start">
                         <h5>水鹿的故鄉｜能高安東軍縱走</h5> 
@@ -62,7 +62,7 @@ export default {
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="card border-0 mb-4">
+                <div class="card  cardProducts border-0 rounded-0 mb-4">
                     <RouterLink to="/product/-NKpwDun9A4lFDuSlmJL"><img src="https://greathunger.com.tw/images/images/activity8_20221114191552.jpg" class="card-img-top rounded-0" alt="戒茂斯上嘉明湖" /></RouterLink>
                     <div class="card-body text-start">
                         <h5>天使的眼淚｜戒茂斯上嘉明湖</h5>
@@ -75,7 +75,7 @@ export default {
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="card border-0 mb-4">
+                <div class="card cardProducts border-0 rounded-0 mb-4">
                     <RouterLink to="/product/-NR2IkrzZx0QBHqSbOca"><img src="https://greathunger.com.tw/images/images/activity0_20221115212626.jpg" class="card-img-top rounded-0" alt="加羅湖" /></RouterLink>
                     <div class="card-body text-start">
                         <h5>散落的珍珠｜加羅湖</h5>
@@ -88,7 +88,7 @@ export default {
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="card border-0 mb-4">
+                <div class="card cardProducts border-0 rounded-0 mb-4">
                     <RouterLink to="/product/-NR2CbYAl8zohH3Px7O1"><img src="https://greathunger.com.tw/images/activity_20221115211124.jpg" class="card-img-top rounded-0" alt="水漾森林" /></RouterLink>
                     <div class="card-body text-start">
                         <h5>即將消失的秘境｜水漾森林</h5>
@@ -106,7 +106,7 @@ export default {
     <!-- 登山知識 -->
     <section class="">
         <div class="row g-0 flex-row-reverse">
-            <div class="col-md-6 bg-secondary d-flex align-items-center ">
+            <div class="col-md-6 bg-secondary d-flex align-items-center text-white">
                 <div class="container m-5">
                     <div>
                         <h2 class="mb-5">登山<br>知識</h2>

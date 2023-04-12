@@ -15,11 +15,28 @@ export default {
   },
   methods: {
     getProduct () {
-      const { id } = this.$route.params;
-      this.$http.get(`${VITE_URL}/v2/api/${VITE_PATH}/product/${id}`)
+    //   const { id } = this.$route.params; 
+      this.$http.get(`${VITE_URL}/v2/api/${VITE_PATH}/product/${this.id}`)
         .then(res=>{
             this.product = res.data.product
-            this.getRelativeProducts()
+            this.getRelativeProducts()  
+        })
+    },
+    getProducts (category,page = 1) {
+        let url=`${VITE_URL}v2/api/${VITE_PATH}/products/`;
+        switch(category){
+          case"初階體驗":
+          case"中階探索":
+          case"高階冒險":
+            url=`${VITE_URL}/v2/api/${VITE_PATH}/products?category=${category}`
+            break;
+            default:
+            url=`${VITE_URL}/v2/api/${VITE_PATH}/products?page=${page}`;
+        }
+        this.$http(url)
+          .then((res) => {
+            this.products = res.data.products
+            this.pagination = res.data.pagination
         })
     },
     getRelativeProducts () {
@@ -47,14 +64,19 @@ export default {
   components: {
     RouterLink
   },
-  watch: {
-    '$route.params': {
-      immediate: true,
-      handler() {
-        this.getProduct();
-      },
-    },
+  created() {
+    const { id } = this.$route.params
+    this.id = id;
+    this.getProduct();
   },
+//   watch: {
+//     '$route.params': {
+//       immediate: true,
+//       handler() {
+//         this.getProduct();
+//       },
+//     },
+//   },
   mounted () {
     this.getProduct()
   }
@@ -64,9 +86,9 @@ export default {
 <template>
     <div class="container w-100">
         <nav aria-label="breadcrumb">
-            <ol class="breadcrumb bg-white px-0 mb-0 py-3">
+            <ol class="breadcrumb  px-1 mb-0 py-3">
                 <li class="breadcrumb-item"><RouterLink to="/products" class="text-muted" >全部商品</RouterLink></li>
-                <li class="breadcrumb-item text-muted">{{ product.category }}</li>
+                <!-- <li class="breadcrumb-item text-muted">{{ product.category }}</li> -->
                 <li class="breadcrumb-item active" aria-current="page">{{ product.title }}</li>
             </ol>
         </nav>
@@ -116,7 +138,7 @@ export default {
             </div>
             <div class="col-md-7">
                 <h3 class="fw-bold">簡易行程</h3>
-                <p>{{ product.content}}</p>
+                <p class="text-wrapper" >{{ product.content}}</p>
             </div>
         </div>
         <hr>
@@ -125,9 +147,10 @@ export default {
             <div class="row mt-4 mb-5" >
                 <div class="col-lg-3 col-md-6" v-for="item in relativePorduct" :key="item.id">
                     <div class="card border-0 mb-4 h-100">
-                        <RouterLink :to="`/product/${item.id}`">
-                            <img :src="item.imageUrl" class="card-img-top rounded-0" :alt="item.title"/>
-                        </RouterLink>   
+                        <!-- <RouterLink :to="`/product/${item.id}`">
+                            <img :src="item.imageUrl" class="card-img-top rounded-0" :alt="item.title"  />
+                        </RouterLink>    -->
+                        <img :src="item.imageUrl" class="card-img-top rounded-0" :alt="item.title" style="cursor: pointer" @click.prevent="() => toggleId(item.id)" />
                         <div class="card-body text-start">
                         <h5>{{ item.title }}</h5> 
                         <div class="d-flex justify-content-between">
