@@ -43,7 +43,7 @@ export default {
               <li class="nav-item ms-md-2 order-lg-2 order-1">
                 <RouterLink to="/cart" class="nav-link px-2 py-lg-2">
                 <h4 class="bi bi-cart text-white position-relative"></h4>
-                <span
+                <span v-if="cart.length"
                   class="position-absolute top-0 start-100 translate-middle badge bg-danger rounded-pill mt-1">
                     {{ cart.length }}
                 </span>

@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import axios from "axios";
-
+import sweetalert from '@/utils/sweetalert';
 const { VITE_URL, VITE_PATH } = import.meta.env
 
 const cartStore = defineStore("cart", {
@@ -28,8 +28,20 @@ const cartStore = defineStore("cart", {
         },
       };
       axios.post(`${VITE_URL}/v2/api/${VITE_PATH}/cart`, data )
-        .then(() => {
+        .then((res) => {
+          const { message } = res.data;
+          sweetalert.fire({
+            title: `${message}`,
+            icon: 'success',
+          });
           this.getCart()
+        })
+        .catch((err) => {
+          const errMessage = err.response?.data?.message || '資料錯誤';
+          sweetalert.fire({
+            title: `${errMessage}`,
+            icon: 'error',
+          });
         })
     },
     updateCart(item, act) {
@@ -61,6 +73,10 @@ const cartStore = defineStore("cart", {
       this.loadingItem = item.id;
       axios.delete(`${VITE_URL}/v2/api/${VITE_PATH}/cart/${item.id}`)
         .then(() => {
+          sweetalert.fire({
+            title: '已刪除商品',
+            icon: 'success',
+          });
           this.getCart();
           this.loadingItem = "";
         })
@@ -71,11 +87,18 @@ const cartStore = defineStore("cart", {
     deleteAllCart() {
       axios.delete(`${VITE_URL}/v2/api/${VITE_PATH}/carts`)
         .then(() => {
-          alert("已清空購物車");
+          sweetalert.fire({
+            title: '已清空購物車',
+            icon: 'success',
+          });
           this.getCart();
         })
         .catch((err) => {
-          alert(err.data.message);
+          const errMessage = err.response?.data?.message || '資料錯誤';
+          sweetalert.fire({
+            title: `${errMessage}`,
+            icon: 'error',
+          }); 
         });
     },
     addCouponCode (code) {
@@ -84,12 +107,20 @@ const cartStore = defineStore("cart", {
       };
       axios.post(`${VITE_URL}/v2/api/${VITE_PATH}/coupon`, { data: coupon })
         .then((res) => {
-          console.log(res)
+          const { message } = res.data;
+          sweetalert.fire({
+            title: `${message}`,
+            icon: 'success',
+          });
           this.getCart();
           this.coupon_code = ''
         })
         .catch((err) => {
-          console.log(err)
+          const errMessage = err.response?.data?.message || '資料錯誤';
+          sweetalert.fire({
+            title: `${errMessage}`,
+            icon: 'error',
+          });
         })
     }
   },

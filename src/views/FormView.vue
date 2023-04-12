@@ -1,6 +1,9 @@
 <script>
 import { RouterLink } from "vue-router";
 const { VITE_URL, VITE_PATH }  = import.meta.env
+import cartStore from "../stores/cart";
+import { mapActions} from "pinia";
+import sweetalert from '@/utils/sweetalert';
 
 export default {
   data () {
@@ -21,18 +24,26 @@ export default {
       const data = this.data;
         this.$http.post(`${VITE_URL}/v2/api/${VITE_PATH}/order`,{data})
           .then((res)=>{
-            alert(res.data.message);
             const { orderId } = res.data
             //   this.$refs.form.resetForm();
             //   this.data.message = "";
-            //   this.getCarts();
-              this.$router.push(`/checkout/${orderId}`);
+            const { message } = res.data;
+            sweetalert.fire({
+            title: `${message}`,
+            icon: 'success',
+            });
+            this.getCart()
+            this.$router.push(`/checkout/${orderId}`);
 
           }).catch((err)=>{
-            console.log(err)
-            //   alert(err.data.message)
-            })
-        }
+            const errMessage = err.response?.data?.message || '資料錯誤';
+            sweetalert.fire({
+            title: `${errMessage}`,
+            icon: 'error',
+            });
+          })
+        },
+        ...mapActions(cartStore, ["getCart"]) 
   },    
 
   components: {

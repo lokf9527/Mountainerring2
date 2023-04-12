@@ -1,6 +1,7 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import { RouterLink } from 'vue-router';
+import sweetalert from '@/utils/sweetalert';
 import cartStore from "../stores/cart";
 const { VITE_URL, VITE_PATH } = import.meta.env;
 
@@ -23,12 +24,17 @@ export default {
       this.isLoading = true;
       this.$http.get(`${VITE_URL}/v2/api/${VITE_PATH}/order/${this.orderId}`)
         .then((res) => {
+          
           this.isLoading = false;
           const { order } = res.data;
           this.order = order;
         })
         .catch((err) => {
-          alert(err.data.message)
+          const errMessage = err.response?.data?.message || '資料錯誤';
+          sweetalert.fire({
+            title: `${errMessage}`,
+            icon: 'error',
+          });
           this.isLoading = false;
         });
     },
@@ -38,11 +44,19 @@ export default {
         .post(`${VITE_URL}/v2/api/${VITE_PATH}/pay/${this.orderId}`)
         .then(() => {
           this.isLoading = false;
+          sweetalert.fire({
+            title: '付款成功',
+            icon: 'success',
+          });
           this.getOrder();
           this.getCart();
         })
         .catch((err) => {
-          alert(err.data.message)
+          const errMessage = err.response?.data?.message || '資料錯誤';
+          sweetalert.fire({
+            title: `${errMessage}`,
+            icon: 'error',
+          });
           this.isLoading = false;
         });
     },
