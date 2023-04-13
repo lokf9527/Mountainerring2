@@ -40,7 +40,7 @@ export default {
                 <!-- <img style="z-index: 1; " src="../stylesheets/shoes.jpg" alt=""> -->
             </div>
             <div class="col-md-7">
-                <img class="height-s5 w-100 object-fit-cover " src="../assets/pic/能高安東軍.jpeg" alt="能高安東軍">
+                <img class="height-s5 w-100 object-fit-cover d-none d-md-block" src="../assets/pic/能高安東軍.jpeg" alt="能高安東軍">
             </div>
         </div>
     </section>
@@ -119,7 +119,7 @@ export default {
                 <!-- <img style="z-index: 1; " src="../stylesheets/shoes.jpg" alt=""> -->
             </div>
             <div class="col-md-6">
-                <img class="height-s5 w-100 object-fit-cover " src="../assets/pic/knowledge.png" alt="">
+                <img class="height-s5 w-100 object-fit-cover d-none d-md-block " src="../assets/pic/knowledge.png" alt="">
             </div>
         </div>
     </section>

@@ -8,6 +8,9 @@ import App from './App.vue'
 import router from './router'
 
 
+import Loading from 'vue-loading-overlay'
+import 'vue-loading-overlay/dist/css/index.css'
+
 import './assets/main.css'
 import { Field, Form, ErrorMessage, defineRule, configure } from 'vee-validate'
 import {
@@ -40,6 +43,7 @@ app.use(VueAxios, axios)
 app.use(createPinia())
 app.use(router)
 // 全域組件
+app.component('VueLoading', Loading);
 app.component('VForm', Form)
 app.component('VField', Field)
 app.component('ErrorMessage', ErrorMessage)

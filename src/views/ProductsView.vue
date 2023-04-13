@@ -2,6 +2,8 @@
 import imageUrl from '@/assets/pic/banner.png';
 import Pagination from '@/components/PaginationView.vue'
 import { RouterLink } from "vue-router";
+// import Loading from 'vue-loading-overlay'
+// import 'vue-loading-overlay/dist/css/index.css'
 const { VITE_URL, VITE_PATH }  = import.meta.env
 
 export default {
@@ -10,8 +12,10 @@ export default {
       imageUrl:imageUrl,
       products:[],
       pagination: {},
-      currentPage: 1
-    }
+      currentPage: 1,
+      isLoading: false,
+      
+    }   
   },
   methods: {
     getProducts (category,page = 1) {
@@ -29,6 +33,7 @@ export default {
           .then((res) => {
             this.products = res.data.products
             this.pagination = res.data.pagination
+            this.isLoading = false
         })
     },
     updatePage(page=1){
@@ -42,10 +47,13 @@ export default {
   },
   components: {
     RouterLink,
-    Pagination
+    Pagination,
+  },
+  computed: {
   },
   mounted() {
     this.getProducts()
+    this.isLoading = true
   },
 }
 
@@ -63,13 +71,14 @@ export default {
     </header>
     <!-- 商品列表 -->
     <div class="container mt-md-5 mt-3 mb-7">
+        <VueLoading v-model:active="isLoading" />
         <div class="row">
             <div class="col-md-3">
                 <div class="accordion border border-bottom border-top-0 border-start-0 border-end-0 mb-3"
                     id="accordionExample">
                     <div class="card border-0">
                         <div class="card-header px-0 py-4 bg-white border border-bottom-0 border-top border-start-0 border-end-0 rounded-0"
-                            id="headingOne" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                            id="headingOne" >
                             <div class="d-flex justify-content-between align-items-center pe-1">
                                 <h4 class="mb-0 ms-6" style="cursor: pointer" @click="() => getProducts('')">
                                     全部商品

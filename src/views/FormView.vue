@@ -25,8 +25,6 @@ export default {
         this.$http.post(`${VITE_URL}/v2/api/${VITE_PATH}/order`,{data})
           .then((res)=>{
             const { orderId } = res.data
-            //   this.$refs.form.resetForm();
-            //   this.data.message = "";
             const { message } = res.data;
             sweetalert.fire({
             title: `${message}`,
@@ -35,10 +33,9 @@ export default {
             this.getCart()
             this.$router.push(`/checkout/${orderId}`);
 
-          }).catch((err)=>{
-            const errMessage = err.response?.data?.message || '資料錯誤';
+          }).catch(()=>{
             sweetalert.fire({
-            title: `${errMessage}`,
+            title: '無法新增訂單，請確認資料是否填寫完整',
             icon: 'error',
             });
           })

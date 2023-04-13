@@ -54,32 +54,32 @@ export default {
                                 <th scope="row" class="border-0 px-0 font-weight-normal py-4">
                                     <img :src="item.product.imageUrl"
                                         :alt="item.product.title" style="width: 72px; height: 72px; object-fit: cover;">
-                                    <p class="mb-0 fw-bold ms-3 d-inline-block">{{ item.product.title }}</p>
+                                    <p class="mb-0 fw-bold ms-lg-3 d-inline-block">{{ item.product.title }}</p>
                                 </th>
-                                <td class="border-0 align-middle" style="max-width: 160px;">
-                                    <div class="input-group pe-5 ">
+                                <td class="border-0 align-middle px-0 " style="max-width: 160px;">
+                                    <div class="input-group pe-lg-5 ">
                                         <div class="input-group-prepend">
-                                            <button class="btn btn-outline-dark border-0 py-2" type="button"
-                                                id="button-addon1" @click="() => updateCart (item,'reduce')">
+                                            <button class="btn btn-outline-dark border-0 py-2 px-0 px-md-2" type="button"
+                                                id="button-addon1" @click="() => updateCart (item,'reduce')" :disabled="item.id === loadingItem || item.qty === 1">
                                                 <i class="bi bi-dash-lg"></i>
                                             </button>
                                         </div>
                                         <input type="text" class="form-control border-0 text-center my-auto shadow-none"
                                             placeholder="" aria-label="Example text with button addon"
-                                            aria-describedby="button-addon1" :value="item.qty">
+                                            aria-describedby="button-addon1" readonly :value="item.qty">
                                         <div class="input-group-append">
-                                            <button class="btn btn-outline-dark border-0 py-2" type="button"
-                                                id="button-addon2" @click="() => updateCart (item,'increase')">
+                                            <button class="btn btn-outline-dark border-0 py-2 ps-0 pe-0 px-md-2" type="button"
+                                                id="button-addon2" @click="() => updateCart (item,'increase')" :disabled="item.id === loadingItem">
                                                 <i class="bi bi-plus-lg"></i>
                                             </button>
                                         </div>
                                     </div>
                                 </td>
-                                <td class="border-0 align-middle">
+                                <td class="border-0 align-middle ps-4 ps-md-2 ">
                                     <p class="mb-0 ms-auto">NT${{ item.product.price }}</p>
                                 </td>
-                                <td class="border-0 align-middle">
-                                    <button class="btn btn-outline-dark border-0 py-2" type="button" id="button-addon2" @click="() => deleteCart (item)">
+                                <td class="border-0 align-middle px-0">
+                                    <button class="btn btn-outline-dark border-0 py-2" type="button" id="button-addon2" @click="() => deleteCart (item)" :disabled="item.id === loadingItem">
                                         <i class="bi bi-x-lg"></i>
                                     </button>
                                 </td>
@@ -94,7 +94,7 @@ export default {
                             <tbody>
                                 <tr>
                                     <th scope="row" class="border-0 px-0 pt-4 font-weight-normal">小計</th>
-                                    <td class="text-end border-0 px-0 pt-4">NT${{ final_total}}</td>
+                                    <td class="text-end border-0 px-0 pt-4">NT${{ final_total }}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" class="border-0 px-0 pt-0 pb-4 font-weight-normal">付款方式</th>

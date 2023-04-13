@@ -34,7 +34,11 @@ const router = createRouter({
           {
             path:'checkout_success',
             component: () => import('../views/checkoutSuccessView.vue'),
-          }
+          },
+          {
+            path:'about',
+            component: () => import('../views/AboutView.vue'),
+          },
         ]
        }
     // {

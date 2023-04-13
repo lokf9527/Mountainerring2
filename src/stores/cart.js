@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 import sweetalert from '@/utils/sweetalert';
+
 const { VITE_URL, VITE_PATH } = import.meta.env
 
 const cartStore = defineStore("cart", {
@@ -34,7 +35,7 @@ const cartStore = defineStore("cart", {
             title: `${message}`,
             icon: 'success',
           });
-          this.getCart()
+          this.getCart() 
         })
         .catch((err) => {
           const errMessage = err.response?.data?.message || '資料錯誤';
@@ -61,12 +62,21 @@ const cartStore = defineStore("cart", {
       };
       this.loadingItem = item.id;
       axios.put(`${VITE_URL}/v2/api/${VITE_PATH}/cart/${item.id}`, { data })
-        .then(() => {
+        .then((res) => {
           this.getCart();
-          this.loadingItem = "";
+          this.loadingItem = '';
+          const { message } = res.data;
+          sweetalert.fire({
+            title: `${message}`,
+            icon: 'success',
+          });
         })
         .catch((err) => {
-          alert(err.data.message);
+          const errMessage = err.response?.data?.message || '資料錯誤';
+          sweetalert.fire({
+            title: `${errMessage}`,
+            icon: 'error',
+          });
         });
     },
     deleteCart(item) {
@@ -77,6 +87,7 @@ const cartStore = defineStore("cart", {
             title: '已刪除商品',
             icon: 'success',
           });
+          console.log(this.loadingItem)
           this.getCart();
           this.loadingItem = "";
         })

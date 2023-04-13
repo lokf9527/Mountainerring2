@@ -1,5 +1,5 @@
 <script>
-import { mapActions } from "pinia";
+import { mapActions,  } from "pinia";
 import cartStore from "../stores/cart";
 import { RouterLink } from "vue-router";
 const { VITE_URL, VITE_PATH }  = import.meta.env
@@ -88,7 +88,6 @@ export default {
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb  px-1 mb-0 py-3">
                 <li class="breadcrumb-item"><RouterLink to="/products" class="text-muted" >全部商品</RouterLink></li>
-                <!-- <li class="breadcrumb-item text-muted">{{ product.category }}</li> -->
                 <li class="breadcrumb-item active" aria-current="page">{{ product.title }}</li>
             </ol>
         </nav>
@@ -105,10 +104,10 @@ export default {
             </div>
             <div class="col-md-5">
                 <h2 class="fw-bold h1 mb-1">{{ product.title }}</h2>
-                <p class="h4 fw-bold text-end">NT${{ product.price}}</p>
+                <p class="h4 fw-bold text-end">NT${{ product.price }}</p>
                 <div class="input-group my-3 bg-light rounded">
                             <div class="input-group-prepend">
-                                <button class="btn btn-outline-dark border-0 py-2" type="button" id="button-addon1" @click="() => minusOne()">
+                                <button class="btn btn-outline-dark border-0 py-2" type="button" id="button-addon1" @click="() => minusOne()" :disabled="isProcessing || this.qty === 1">
                                     <i class="bi bi-dash-lg"></i>
                                 </button>
                             </div>
@@ -147,9 +146,6 @@ export default {
             <div class="row mt-4 mb-5" >
                 <div class="col-lg-3 col-md-6" v-for="item in relativePorduct" :key="item.id">
                     <div class="card border-0 mb-4 h-100">
-                        <!-- <RouterLink :to="`/product/${item.id}`">
-                            <img :src="item.imageUrl" class="card-img-top rounded-0" :alt="item.title"  />
-                        </RouterLink>    -->
                         <img :src="item.imageUrl" class="card-img-top rounded-0" :alt="item.title" style="cursor: pointer" @click.prevent="() => toggleId(item.id)" />
                         <div class="card-body text-start">
                         <h5>{{ item.title }}</h5> 
