@@ -1,10 +1,11 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 import sweetalert from '@/utils/sweetalert';
-
+import loadingStore from '@/stores/loadingStore.js';
+const status = loadingStore();
 const { VITE_URL, VITE_PATH } = import.meta.env
 
-const cartStore = defineStore("cart", {
+const cartStore = defineStore("cartSrore", {
   state: () => {
     return {
       cart: {},
@@ -27,9 +28,11 @@ const cartStore = defineStore("cart", {
           product_id,
           qty,
         },
-      };
+      }; 
+      status.loadingStatus = product_id;
       axios.post(`${VITE_URL}/v2/api/${VITE_PATH}/cart`, data )
         .then((res) => {
+          status.loadingStatus = '';
           const { message } = res.data;
           sweetalert.fire({
             title: `${message}`,
@@ -60,11 +63,11 @@ const cartStore = defineStore("cart", {
         product_id: item.product.id,
         qty: item.qty,
       };
-      this.loadingItem = item.id;
+      status.loadingStatus = item.id;
       axios.put(`${VITE_URL}/v2/api/${VITE_PATH}/cart/${item.id}`, { data })
         .then((res) => {
           this.getCart();
-          this.loadingItem = '';
+          status.loadingStatus = '';
           const { message } = res.data;
           sweetalert.fire({
             title: `${message}`,
@@ -80,19 +83,22 @@ const cartStore = defineStore("cart", {
         });
     },
     deleteCart(item) {
-      this.loadingItem = item.id;
+      status.loadingStatus = item.id;
       axios.delete(`${VITE_URL}/v2/api/${VITE_PATH}/cart/${item.id}`)
         .then(() => {
+          status.loadingStatus = '';
           sweetalert.fire({
             title: '已刪除商品',
             icon: 'success',
           });
-          console.log(this.loadingItem)
           this.getCart();
-          this.loadingItem = "";
         })
         .catch((err) => {
-          alert(err.data.message);
+          const errMessage = err.response?.data?.message || '資料錯誤';
+          sweetalert.fire({
+            title: `${errMessage}`,
+            icon: 'error',
+          });
         });
     },
     deleteAllCart() {

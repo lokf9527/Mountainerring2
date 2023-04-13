@@ -2,7 +2,7 @@
 import { mapActions, mapState } from "pinia";
 import { RouterLink } from 'vue-router';
 import sweetalert from '@/utils/sweetalert';
-import cartStore from "../stores/cart";
+import cartStore from "../stores/cartStore";
 const { VITE_URL, VITE_PATH } = import.meta.env;
 
 

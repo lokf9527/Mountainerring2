@@ -1,7 +1,7 @@
 <script>
 import { RouterLink } from "vue-router";
 const { VITE_URL, VITE_PATH }  = import.meta.env
-import cartStore from "../stores/cart";
+import cartStore from "../stores/cartStore";
 import { mapActions} from "pinia";
 import sweetalert from '@/utils/sweetalert';
 

@@ -2,7 +2,7 @@
 import { mapActions, mapState } from "pinia";
 import { RouterView,RouterLink } from 'vue-router'
 import Collapse from 'bootstrap/js/dist/collapse';
-import cartStore from "../stores/cart";
+import cartStore from "../stores/cartStore";
 export default { 
   data () {
     return {

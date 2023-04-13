@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia';
 
-export default defineStore('loading', {
+export default defineStore('loadingStore', {
   state: () => ({
-    loadingItem: '',
+    loadingStatus: '',
     isProcessing: false,
     isLoading: false,
   }),

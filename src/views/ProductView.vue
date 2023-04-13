@@ -1,7 +1,9 @@
 <script>
-import { mapActions,  } from "pinia";
-import cartStore from "../stores/cart";
+import { mapActions, mapState } from "pinia";
 import { RouterLink } from "vue-router";
+import cartStore from "../stores/cartStore";
+import loadingStore from '../stores/loadingStore.js';
+
 const { VITE_URL, VITE_PATH }  = import.meta.env
 
 export default {
@@ -64,6 +66,9 @@ export default {
   components: {
     RouterLink
   },
+  computed: {
+      ...mapState(loadingStore, ['loadingStatus']),
+    },
   created() {
     const { id } = this.$route.params
     this.id = id;
@@ -122,7 +127,10 @@ export default {
                         </div>
                 <div class="row align-items-center">
                     <div class="col-6">
-                        <button type="button" class="text-nowrap btn btn-dark w-100 py-2" @click="() => addToCart(product.id,qty)">加入購物車</button>
+                        <button type="button" class="text-nowrap btn btn-dark w-100 py-2" @click="() => addToCart(product.id,qty)" :disabled="loadingStatus === product.id">
+                            <i class="spinner-border spinner-border-sm me-3" v-if="loadingStatus === product.id"></i>
+                            <span>加入購物車</span>
+                        </button>
                     </div>
                     <div class="col-6">
                         <RouterLink to="/cart" class="text-nowrap btn btn-dark w-100 py-2" @click="() => addToCart(product.id,qty)">立刻購買</RouterLink>
