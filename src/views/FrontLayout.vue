@@ -66,7 +66,7 @@ export default {
                       </RouterLink>
                     </li>
                     <li class="nav-item">
-                      <RouterLink to="/follows" class="nav-link text-white py-lg-2 py-4 fs-6" @click="closeNavCollapse">
+                      <RouterLink to="/favorites" class="nav-link text-white py-lg-2 py-4 fs-6" @click="closeNavCollapse">
                         追蹤清單
                       </RouterLink>
                     </li>
@@ -77,84 +77,6 @@ export default {
           </div>
         </div>
       </nav> 
-      <!-- <br> -->
-      <!-- <nav class="navbar navbar-expand-lg navbar-light bg-primary">
-        <div class="container">
-          <div>
-              <RouterLink to="/" class="navbar-brand text-white fs-4" style="font-family:Righteous">MOUNTAINERRING</RouterLink>
-          </div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-          </button>
-          <ul class="navbar-nav flex-row">
-            <li class="nav-item ms-md-2 order-lg-2 order-1">
-                <RouterLink to="/cart" class="nav-item nav-link">
-                <h4 class="bi bi-cart text-white position-relative"></h4>
-                <span
-                  class="position-absolute top-0 start-100 translate-middle badge bg-danger rounded-pill mt-1">
-                    {{ cart.length }}
-                </span>
-              </RouterLink>
-            </li>
-            <li class="nav-item order-lg-1 order-2">
-                <button class="navbar-toggler mb-4" type="button" @click="toggleNavCollapse">
-                  <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent" ref="collapse">
-                  <ul class="navbar-nav mb-2 mb-lg-0">
-                    <li class="nav-item noHover">
-                      <RouterLink to="/products" class="nav-link text-white py-lg-2 py-4 fs-6" @click="closeNavCollapse">
-                        商品列表
-                      </RouterLink>
-                    </li>
-                    <li class="nav-item">
-                      <RouterLink to="/articles" class="nav-link text-white py-lg-2 py-4 fs-6" @click="closeNavCollapse">
-                        登山專欄
-                      </RouterLink>
-                    </li>
-                    <li class="nav-item">
-                      <RouterLink to="/follows" class="nav-link text-white py-lg-2 py-4 fs-6" @click="closeNavCollapse">
-                        追蹤清單
-                      </RouterLink>
-                    </li>
-                  </ul>
-                </div>
-              </li> 
-          <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-            <ul class="navbar-nav flex-row">
-              <li class="nav-item ms-md-2 order-lg-2 order-1">
-                <RouterLink to="/cart" class="nav-item nav-link">
-                <h4 class="bi bi-cart text-white position-relative"></h4>
-                <span
-                  class="position-absolute top-0 start-100 translate-middle badge bg-danger rounded-pill mt-1">
-                    {{ cart.length }}
-                </span>
-              </RouterLink>
-              </li>
-              <div class="collapse navbar-collapse" id="navbarSupportedContent" ref="collapse">
-                  <ul class="navbar-nav mb-2 mb-lg-0">
-                    <li class="nav-item noHover">
-                      <RouterLink to="/products" class="nav-link text-white py-lg-2 py-4 fs-6" @click="closeNavCollapse">
-                        商品列表
-                      </RouterLink>
-                    </li>
-                    <li class="nav-item">
-                      <RouterLink to="/articles" class="nav-link text-white py-lg-2 py-4 fs-6" @click="closeNavCollapse">
-                        登山專欄
-                      </RouterLink>
-                    </li>
-                    <li class="nav-item">
-                      <RouterLink to="/follows" class="nav-link text-white py-lg-2 py-4 fs-6" @click="closeNavCollapse">
-                        追蹤清單
-                      </RouterLink>
-                    </li>
-                  </ul>
-              </div>
-            </ul>
-          </div>
-          </ul>
-    </div>
-</nav> -->
 
 
     

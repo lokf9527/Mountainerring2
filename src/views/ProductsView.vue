@@ -1,10 +1,12 @@
 <script >
 import imageUrl from '@/assets/pic/banner.png';
 import Pagination from '@/components/PaginationView.vue'
+import followsStore from '../stores/favoriteStore';
 import { RouterLink } from "vue-router";
-// import Loading from 'vue-loading-overlay'
-// import 'vue-loading-overlay/dist/css/index.css'
+import { mapActions, mapState } from 'pinia';
 const { VITE_URL, VITE_PATH }  = import.meta.env
+
+const follow = followsStore();
 
 export default {
   data(){
@@ -14,6 +16,7 @@ export default {
       pagination: {},
       currentPage: 1,
       isLoading: false,
+      
       
     }   
   },
@@ -32,6 +35,7 @@ export default {
         this.$http(url)
           .then((res) => {
             this.products = res.data.products
+            follow.tempProducts(this.products);
             this.pagination = res.data.pagination
             this.isLoading = false
         })
@@ -44,16 +48,15 @@ export default {
             this.pagination = res.data.pagination
             })
         },
+    ...mapActions(followsStore, ['getFollows', 'toggleFollow']),
   },
-  components: {
-    RouterLink,
-    Pagination,
-  },
+  components: { RouterLink,Pagination },
   computed: {
+    ...mapState(followsStore, ['followIds']),
   },
   mounted() {
     this.getProducts()
-    this.isLoading = true
+    this.isLoading = true;
   },
 }
 
@@ -99,7 +102,6 @@ export default {
                 </div>
             </div>
             <div class="col-md-9">
-                <!-- <h4 class="my-3">全部商品</h4> -->
                 <div class="row">
                     <div class="col-md-4" v-for="product in products" :key="product.id">
                         <div class="card cardProducts border-0 rounded-0 mb-4  position-relative">
@@ -107,10 +109,11 @@ export default {
                                 <img :src="product.imageUrl"
                                 class="card-img-top rounded-0 object-fit-cover" :alt="product.title">
                             </RouterLink>
-                            <!-- <a href="#" class="text-dark">
-                                <i class="far fa-heart position-absolute" style="right: 16px; top: 16px"></i>
-                            </a> -->
-                            <div class="card-body text-start">
+                            <div class="card-body text-start" >  
+                                <div class="position-absolute" style="cursor: pointer; right: 30px; top:10px" @click.prevent="() => toggleFollow(product.id)">
+                                <i class="bi bi-heart text-danger h5 position-absolute"  v-if="followIds.indexOf(product.id) === -1"></i>
+                                <i class="bi bi-heart-fill text-danger h5 position-absolute" v-else></i>
+                                </div>
                                 <h4 class="mt-3 h5">
                                     <RouterLink :to="`/product/${product.id}`">{{ product.title}}</RouterLink>
                                 </h4>

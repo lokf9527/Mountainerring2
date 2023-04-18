@@ -112,7 +112,7 @@ export default {
                 <p class="h4 fw-bold text-end">NT${{ product.price }}</p>
                 <div class="input-group my-3 bg-light rounded">
                             <div class="input-group-prepend">
-                                <button class="btn btn-outline-dark border-0 py-2" type="button" id="button-addon1" @click="() => minusOne()" :disabled="isProcessing || this.qty === 1">
+                                <button class="btn btn-outline-dark border-0 py-2" type="button" id="button-addon1" @click="() => minusOne()" :disabled="this.qty === 1">
                                     <i class="bi bi-dash-lg"></i>
                                 </button>
                             </div>

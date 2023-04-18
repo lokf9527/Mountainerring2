@@ -1,39 +1,44 @@
 <script>
 import { RouterLink } from "vue-router";
-const { VITE_URL, VITE_PATH }  = import.meta.env
+import { mapActions,mapState } from "pinia";
 import cartStore from "../stores/cartStore";
-import { mapActions} from "pinia";
+import loadingStore from '../stores/loadingStore.js';
 import sweetalert from '@/utils/sweetalert';
+
+const { VITE_URL, VITE_PATH }  = import.meta.env
 
 export default {
   data () {
     return {
         data: {
-                user: {
-                  email: "",
-                  name: "",
-                  tel: "",
-                  address: "",
+            user: {
+                email: "",
+                name: "",
+                tel: "",
+                address: "",
                 },
                 message: "",
-              },
+        },
+        isProcessing: false
+        
     }
   },
   methods: {
     createtOrder () {
+      this.isProcessing = true
       const data = this.data;
-        this.$http.post(`${VITE_URL}/v2/api/${VITE_PATH}/order`,{data})
-          .then((res)=>{
-            const { orderId } = res.data
-            const { message } = res.data;
+        this.$http.post(`${VITE_URL}/v2/api/${VITE_PATH}/order`,{ data })
+          .then((res) => {
+            const { orderId, message } = res.data
+            this.isProcessing = false
             sweetalert.fire({
             title: `${message}`,
             icon: 'success',
             });
             this.getCart()
             this.$router.push(`/checkout/${orderId}`);
-
-          }).catch(()=>{
+          })
+          .catch(()=>{
             sweetalert.fire({
             title: '無法新增訂單，請確認資料是否填寫完整',
             icon: 'error',
@@ -42,10 +47,12 @@ export default {
         },
         ...mapActions(cartStore, ["getCart"]) 
   },    
-
   components: {
     RouterLink
-  }
+  },
+  computed: {
+      ...mapState(loadingStore, ['loadingStatus']),
+    },
 }
 </script>
 
@@ -91,7 +98,8 @@ export default {
                     <RouterLink to="/cart" class="btn btn-danger">回購物車</RouterLink>
                 </div> 
                 <div class="text-end col">
-                    <button type="submit" class="btn btn-primary" @click="() => createtOrder()">送出訂單</button>
+                    <button type="submit" class="btn btn-primary" @click="() => createtOrder()" :disabled="isProcessing">
+                        送出訂單</button>
                 </div>
             </div>
         </v-form>

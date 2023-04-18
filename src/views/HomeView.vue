@@ -113,7 +113,7 @@ export default {
                         <h4>關於獨攀這件事</h4>
                         <p>這個6月份，就三起山中事故的新聞報導：1. 男獨攀立霧山受困求助 救難隊河谷尋獲遺體2. 獨攀桃山失聯！男山友失足墜溪溺斃3. 男獨攀合歡山受困 「跑山獸」連夜入山尋獲
                         </p>
-                        <button class="btn btn-outline-light " type="button">查看更多</button>
+                        <RouterLink class="btn btn-outline-light" to="/article/-NTDWGukt4LEU0tUbT60">查看更多</RouterLink>
                     </div>
                 </div>
                 <!-- <img style="z-index: 1; " src="../stylesheets/shoes.jpg" alt=""> -->

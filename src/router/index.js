@@ -32,13 +32,18 @@ const router = createRouter({
             component: () => import('../views/CheckoutView.vue'),
           },
           {
-            path:'checkout_success',
-            component: () => import('../views/checkoutSuccessView.vue'),
+            path:'articles',
+            component: () => import('../views/ArticlesView.vue'),
           },
           {
-            path:'about',
-            component: () => import('../views/AboutView.vue'),
+            path:'article/:id',
+            component: () => import('../views/ArticleView.vue'),
           },
+          {
+            path:'favorites',
+            component: () => import('../views/FavoritesView.vue'),
+          },
+          
         ]
        }
     // {

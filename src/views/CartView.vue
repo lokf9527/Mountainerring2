@@ -13,6 +13,7 @@ export default {
           product: {},
           id: "",
           qty: 1,
+          isLoading: false,
         }
     },
     methods:{
@@ -30,11 +31,16 @@ export default {
     },
     mounted(){
         this.getCart();
+        this.isLoading = true 
+        setTimeout(() => {
+        this.isLoading = false;
+      }, 500);
     },
 }
 </script>
 <template>
     <div class="container">
+        <VueLoading v-model:active="isLoading" />
         <div class="mt-3" v-if="cart.length">
             <h3 class="mt-3 mb-4">購物車</h3>
             <div class="row">
@@ -96,7 +102,7 @@ export default {
                             <tbody>
                                 <tr>
                                     <th scope="row" class="border-0 px-0 pt-4 font-weight-normal">小計</th>
-                                    <td class="text-end border-0 px-0 pt-4">NT${{ final_total }}</td>
+                                    <td class="text-end border-0 px-0 pt-4">NT${{ total }}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" class="border-0 px-0 pt-0 pb-4 font-weight-normal">付款方式</th>
@@ -118,17 +124,16 @@ export default {
                         </div>
                         <div class="d-flex justify-content-between mt-4">
                             <p class="mb-0 h4 fw-bold">總計</p>
-                            <p class="mb-0 h4 fw-bold">NT${{ final_total-discount }}</p>
+                            <p class="mb-0 h4 fw-bold">NT${{ final_total }}</p>
                         </div>
-                        <!-- <a href="./checkout.html" class="btn btn-dark w-100 mt-4">前往結賬</a> -->
-                        <RouterLink to="/form" class="btn btn-dark w-100 mt-4" >前往結帳</RouterLink>
+                        <RouterLink to="/form" class="btn btn-dark w-100 mt-4">前往結帳</RouterLink>
                     </div>
                 </div>
             </div>
             <h4 class="fw-bold mt-1">你可能會有興趣 ...</h4>
                 <div class="row my-4">
                     <div class="col-md-3">
-                        <div class="card border-0 mb-4">    
+                        <div class="card border-0 mb-4 cardProducts">    
                             <RouterLink to="/product/-NN0TN0Oy7quf2LBeINs"><img src="https://greathunger.com.tw/images/images/activity2_20221202152957.jpg" class="card-img-top rounded-0" alt="能高安東軍縱走" /></RouterLink>
                             <div class="card-body text-start">
                                 <h5>水鹿的故鄉｜能高安東軍縱走</h5> 
@@ -141,7 +146,7 @@ export default {
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="card border-0 mb-4">
+                        <div class="card border-0 mb-4 cardProducts">
                             <RouterLink to="/product/-NKpwDun9A4lFDuSlmJL"><img src="https://greathunger.com.tw/images/images/activity8_20221114191552.jpg" class="card-img-top rounded-0" alt="戒茂斯上嘉明湖" /></RouterLink>
                             <div class="card-body text-start">
                                 <h5>天使的眼淚｜戒茂斯上嘉明湖</h5>
@@ -154,7 +159,7 @@ export default {
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="card border-0 mb-4">
+                        <div class="card border-0 mb-4 cardProducts">
                             <RouterLink to="/product/-NR2IkrzZx0QBHqSbOca"><img src="https://greathunger.com.tw/images/images/activity0_20221115212626.jpg" class="card-img-top rounded-0" alt="加羅湖" /></RouterLink>
                             <div class="card-body text-start">
                                 <h5>散落的珍珠｜加羅湖</h5>
@@ -167,7 +172,7 @@ export default {
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="card border-0 mb-4">
+                        <div class="card border-0 mb-4 cardProducts">
                             <RouterLink to="/product/-NR2CbYAl8zohH3Px7O1"><img src="https://greathunger.com.tw/images/activity_20221115211124.jpg" class="card-img-top rounded-0" alt="水漾森林" /></RouterLink>
                             <div class="card-body text-start">
                                 <h5>即將消失的秘境｜水漾森林</h5>
@@ -189,7 +194,7 @@ export default {
                 <h4 class="fw-bold mt-5">你可能會有興趣 ...</h4>
                 <div class="row mt-4 mb-5">
                     <div class="col-md-3">
-                        <div class="card border-0 mb-4">    
+                        <div class="card border-0 mb-4 cardProducts">    
                             <RouterLink to="/product/-NN0TN0Oy7quf2LBeINs"><img src="https://greathunger.com.tw/images/images/activity2_20221202152957.jpg" class="card-img-top rounded-0" alt="能高安東軍縱走" /></RouterLink>
                             <div class="card-body text-start">
                                 <h5>水鹿的故鄉｜能高安東軍縱走</h5> 
@@ -202,7 +207,7 @@ export default {
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="card border-0 mb-4">
+                        <div class="card border-0 mb-4 cardProducts">
                             <RouterLink to="/product/-NKpwDun9A4lFDuSlmJL"><img src="https://greathunger.com.tw/images/images/activity8_20221114191552.jpg" class="card-img-top rounded-0" alt="戒茂斯上嘉明湖" /></RouterLink>
                             <div class="card-body text-start">
                                 <h5>天使的眼淚｜戒茂斯上嘉明湖</h5>
@@ -215,7 +220,7 @@ export default {
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="card border-0 mb-4">
+                        <div class="card border-0 mb-4 cardProducts">
                             <RouterLink to="/product/-NR2IkrzZx0QBHqSbOca"><img src="https://greathunger.com.tw/images/images/activity0_20221115212626.jpg" class="card-img-top rounded-0" alt="加羅湖" /></RouterLink>
                             <div class="card-body text-start">
                                 <h5>散落的珍珠｜加羅湖</h5>
@@ -228,7 +233,7 @@ export default {
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="card border-0 mb-4">
+                        <div class="card border-0 mb-4 cardProducts">
                             <RouterLink to="/product/-NR2CbYAl8zohH3Px7O1"><img src="https://greathunger.com.tw/images/activity_20221115211124.jpg" class="card-img-top rounded-0" alt="水漾森林" /></RouterLink>
                             <div class="card-body text-start">
                                 <h5>即將消失的秘境｜水漾森林</h5>

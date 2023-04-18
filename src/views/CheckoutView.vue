@@ -14,18 +14,14 @@ export default {
         user: {},
       },
       orderId: '',
-    //   isLoading: false,
-    //   isProcessing: false,
+      isProcessing: false
     };
   },
   components: { RouterLink },
   methods: {
     getOrder() {
-      this.isLoading = true;
       this.$http.get(`${VITE_URL}/v2/api/${VITE_PATH}/order/${this.orderId}`)
         .then((res) => {
-          
-          this.isLoading = false;
           const { order } = res.data;
           this.order = order;
         })
@@ -35,15 +31,14 @@ export default {
             title: `${errMessage}`,
             icon: 'error',
           });
-          this.isLoading = false;
         });
     },
     payOrder() {
-      this.isLoading = true;
+      this.isProcessing = true
       this.$http
         .post(`${VITE_URL}/v2/api/${VITE_PATH}/pay/${this.orderId}`)
         .then(() => {
-          this.isLoading = false;
+          this.isProcessing = false
           sweetalert.fire({
             title: '付款成功',
             icon: 'success',
@@ -57,7 +52,6 @@ export default {
             title: `${errMessage}`,
             icon: 'error',
           });
-          this.isLoading = false;
         });
     },
     ...mapActions(cartStore, ["getCart"]),
@@ -65,7 +59,7 @@ export default {
   computed: {
       ...mapState(cartStore,["cart","total","final_total"]),
       discount () {
-        return (this.total-this.final_total).toFixed(2)
+        return (this.total-this.final_total)
     }
   },
   mounted() {
@@ -85,36 +79,19 @@ export default {
         </div>
         <div class="card-body px-4 py-0">
           <ul class="list-group list-group-flush">
-            <li
-              v-for="item in order.products"
-              :key="item.id"
-              class="list-group-item px-0"
-            >
+            <li v-for="item in order.products" :key="item.id" class="list-group-item px-0">
               <div class="d-flex mt-2">
-                <div style="
-                    width: 65px;
-                    max-height: 60px;
-                    background-size: cover;
-                    background-position: center;
-                  "
-                  class="rounded-0 me-3"
-                  :style="{ backgroundImage: `url(${item.product?.imageUrl})` }"
-                >
+                <div style="width: 65px; max-height: 60px; background-size: cover; background-position: center;"
+                  class="rounded-0 me-3" :style="{ backgroundImage: `url(${item.product.imageUrl})` }">
               </div>
                 <div class="w-100 d-flex flex-column">
                   <div class="d-flex justify-content-between fw-bold">
-                    <h5>{{ item.product?.title }}</h5>
+                    <h5>{{ item.product.title }}</h5>
                     <p class="mb-0">x{{ item.qty }}</p>
                   </div>
                   <div class="d-flex justify-content-between mt-auto">
-                    <p class="text-muted mb-0">
-                      <small>
-                        NT${{ item.product?.price }}
-                      </small>
-                    </p>
-                    <p class="mb-0">
-                      NT${{ item.product?.price}}
-                    </p>
+                    <p class="text-muted mb-0"><small>NT${{ item.product.price }}</small></p>
+                    <p class="mb-0">NT${{ item.final_total }}</p>
                   </div>
                 </div>
               </div>
@@ -123,18 +100,14 @@ export default {
               <table class="table text-muted">
                 <tbody>
                   <tr>
-                    <th scope="row" class="border-0 px-0 pt-0 font-weight-normal">
-                      Payment
-                    </th>
+                    <th scope="row" class="border-0 px-0 pt-0 font-weight-normal">Payment</th>
                     <td class="text-end border-0 px-0 pt-0">信用卡</td>
                   </tr>
                 </tbody>
               </table>
               <div class="d-flex justify-content-between mt-2">
                 <p class="mb-0 h4 fw-bold">總計</p>
-                <p class="mb-0 h4 fw-bold">
-                  NT${{ order.total }}
-                </p>
+                <p class="mb-0 h4 fw-bold">NT${{ order.total }}</p>
               </div>
             </li>
           </ul>
@@ -171,15 +144,12 @@ export default {
         </table>
       </div>
       <div
-        class="d-flex mt-4 justify-content-between align-items-md-center align-items-end w-100"
-        v-if="order.is_paid === false"
-      >
-        <!-- <RouterLink to="/form" class="btn btn-primary"> 回上一頁 </RouterLink> -->
-        <button type="submit" class="btn btn-primary">確認付款</button>
+        class="d-flex mt-4 justify-content-between align-items-md-center align-items-end w-100" v-if="order.is_paid === false">
+        <button type="submit" class="btn btn-primary" :disabled="isProcessing">確認付款</button>
       </div>
     </form>
     <div v-if="order.is_paid" class="text-end">
-      <RouterLink to="/" class="btn btn-primary me-2 my-4"> 回首頁 </RouterLink>
+      <RouterLink to="/" class="btn btn-primary me-2 my-4">回首頁</RouterLink>
     </div>
   </div>
     </div>
