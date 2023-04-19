@@ -2,8 +2,9 @@ import { defineStore } from "pinia";
 import axios from "axios";
 import sweetalert from '@/utils/sweetalert';
 import loadingStore from '@/stores/loadingStore.js';
-const status = loadingStore();
+
 const { VITE_URL, VITE_PATH } = import.meta.env
+const status = loadingStore();
 
 const cartStore = defineStore("cartSrore", {
   state: () => {
@@ -11,15 +12,18 @@ const cartStore = defineStore("cartSrore", {
       cart: {},
       total: 0,
       final_total: 0,
+      code:''
     }
   },
   actions: {
     getCart() {
+      status.isLoading = true;
       axios.get(`${VITE_URL}/v2/api/${VITE_PATH}/cart`)
         .then(res => {
           this.cart = res.data.data.carts
           this.total = res.data.data.total
           this.final_total = res.data.data.final_total
+          status.isLoading = false;
         })
     },
     addToCart(product_id, qty = 1) {
@@ -104,6 +108,7 @@ const cartStore = defineStore("cartSrore", {
     deleteAllCart() {
       axios.delete(`${VITE_URL}/v2/api/${VITE_PATH}/carts`)
         .then(() => {
+          status.loadingStatus = '';
           sweetalert.fire({
             title: '已清空購物車',
             icon: 'success',
@@ -119,9 +124,8 @@ const cartStore = defineStore("cartSrore", {
         });
     },
     addCouponCode (code) {
-      const coupon = {
-        code 
-      };
+      const coupon = { code };
+      status.loadingStatus = code;
       axios.post(`${VITE_URL}/v2/api/${VITE_PATH}/coupon`, { data: coupon })
         .then((res) => {
           const { message } = res.data;
@@ -129,8 +133,9 @@ const cartStore = defineStore("cartSrore", {
             title: `${message}`,
             icon: 'success',
           });
+          this.code = '' 
           this.getCart();
-          this.coupon_code = ''
+          status.loadingStatus = ''
         })
         .catch((err) => {
           const errMessage = err.response?.data?.message || '資料錯誤';
@@ -141,7 +146,6 @@ const cartStore = defineStore("cartSrore", {
         })
     }
   },
-
   getters: {}
 })
 

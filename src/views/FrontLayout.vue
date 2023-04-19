@@ -67,7 +67,7 @@ export default {
                     </li>
                     <li class="nav-item">
                       <RouterLink to="/favorites" class="nav-link text-white py-lg-2 py-4 fs-6" @click="closeNavCollapse">
-                        追蹤清單
+                        收藏清單
                       </RouterLink>
                     </li>
                   </ul>
@@ -85,7 +85,8 @@ export default {
     <div class="footer py-5 bg-primary mt-auto">
         <div class="container">
             <div class="h5">Mountaineering</div>
-            <p><a>Mountaineering@gmail.com</a> (02) 1234-5678</p>
+            <p><a href="email:Mountaineering@gmail.com">Mountaineering@gmail.com</a></p>
+            <p><a href="tel:(02)1234-5678">(02)1234-5678</a></p>
             <p>Copyright © Mountaineering All Rights Reserved. 此網站僅供作品展示用，無任何商業用途</p>
         </div>
     </div>

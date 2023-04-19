@@ -9,7 +9,7 @@ import loadingStore from '../stores/loadingStore.js';
 export default {
     data(){
         return{
-          code:"",
+          code:'',
           product: {},
           id: "",
           qty: 1,
@@ -31,7 +31,7 @@ export default {
     },
     mounted(){
         this.getCart();
-        this.isLoading = true 
+        this.isLoading = true;
         setTimeout(() => {
         this.isLoading = false;
       }, 500);
@@ -117,7 +117,7 @@ export default {
                         <div class="input-group mb-3 input-group-sm">
                             <input type="text" class="form-control"  placeholder="請輸入優惠碼 VIP777" v-model="code"/>
                             <div class="input-group-append">
-                                <button class="btn btn-outline-primary" style="border-top-left-radius:0%; border-bottom-left-radius:0%" type="button" @click="() => addCouponCode(code)">
+                                <button class="btn btn-outline-primary" style="border-top-left-radius:0%; border-bottom-left-radius:0%" type="button" @click="addCouponCode(code)" :disabled="loadingStatus === code">
                                     套用優惠碼
                                 </button>
                             </div>

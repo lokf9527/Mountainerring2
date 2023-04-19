@@ -110,8 +110,8 @@ export default {
                 <div class="container m-5">
                     <div>
                         <h2 class="mb-5">登山<br>知識</h2>
-                        <h4>關於獨攀這件事</h4>
-                        <p>這個6月份，就三起山中事故的新聞報導：1. 男獨攀立霧山受困求助 救難隊河谷尋獲遺體2. 獨攀桃山失聯！男山友失足墜溪溺斃3. 男獨攀合歡山受困 「跑山獸」連夜入山尋獲
+                        <h4>艱困路線的行走技巧</h4>
+                        <p>就以百岳可能途經的路線來說，安東軍-摩即山-草山段，絕對是最容易迷路第一名。雖然多數人不會去走到這路線，就其它百岳路線類似的來說，比較容易迷失、植物茂密、路徑不明的還有
                         </p>
                         <RouterLink class="btn btn-outline-light" to="/article/-NTDWGukt4LEU0tUbT60">查看更多</RouterLink>
                     </div>

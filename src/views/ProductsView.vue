@@ -68,7 +68,7 @@ export default {
             <div class="me-4">
                 <h3 class="text-dark" style="font-family:Righteous;">MOUNTAINERRING</h3>
                 <h1 class="fw-bold text-dark mb-3">和你一起翻山越嶺</h1>
-                <button class="btn btn-dark py-2" type="button">查看行程</button>
+                <RouterLink to="/products" class="btn btn-dark py-2">查看行程</RouterLink>
             </div>
         </div>
     </header>
