@@ -29,13 +29,13 @@ export default defineStore('follows', {
       if (followId === -1) {
         this.followIds.push(id);
         sweetalert.fire({
-          title: '已加入追蹤',
+          title: '已加入收藏',
           icon: 'success',
         });
       } else {
         this.followIds.splice(followId, 1);
         sweetalert.fire({
-          title: '已取消追蹤',
+          title: '已取消收藏',
           icon: 'success',
         });
       }

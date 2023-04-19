@@ -139,13 +139,13 @@ export default {
             </div>
         </div>
         <div class="row my-5">
-            <div class="col-md-7">
-                <p>{{ product.description}}</p>
+            <div class="col-md-7 text-wrapper">
+                <p>{{ product.description }}</p>
                 <hr>
             </div>
             <div class="col-md-7">
                 <h3 class="fw-bold">簡易行程</h3>
-                <p class="text-wrapper" >{{ product.content}}</p>
+                <p class="text-wrapper" >{{ product.content }}</p>
             </div>
         </div>
         <hr>
