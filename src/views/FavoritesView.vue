@@ -1,6 +1,7 @@
 <script>
 import followsStore from '../stores/favoriteStore';
 import imageUrl from '@/assets/pic/banner.png';
+import sweetalert from '@/utils/sweetalert';
 import { mapActions, mapState } from 'pinia';
 import { RouterLink } from 'vue-router';
 
@@ -20,9 +21,16 @@ export default {
         this.$http(`${VITE_URL}/v2/api/${VITE_PATH}/products/all`)
           .then((res) => {
             this.products = res.data.products
-            follow.tempProducts(this.products);
+            follow.tempProducts(this.products)
             this.pagination = res.data.pagination
             this.isLoading = false
+        })
+        .catch((err) => {
+          const errMessage = err.response?.data?.message || '取得產品列表失敗，請稍後再試'
+          sweetalert.fire({
+            title: `${errMessage}`,
+            icon: 'error',
+          })
         })
     },
     ...mapActions(followsStore, ['getFollows', 'toggleFollow']),
@@ -40,6 +48,7 @@ export default {
 
 <template>
     <VueLoading v-model:active="isLoading" />
+    <!-- banner -->
     <header class="favorite-header" :style="{'background-image':`url(${imageUrl})`}">
         <div class="container d-flex justify-content-end align-items-center h-75 w-50 ">
             <div class="me-4">
@@ -49,6 +58,7 @@ export default {
             </div>
         </div>
     </header>
+    <!-- 收藏清單 -->
     <div class="container mt-md-5 mt-3 mb-7">
         <div class="row" v-if="followList.length">
             <div class="col-md-12">
@@ -144,5 +154,4 @@ export default {
                 </div>
         </div>
     </div>
-    
 </template>

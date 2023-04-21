@@ -9,18 +9,18 @@ import loadingStore from '../stores/loadingStore.js';
 export default {
     data(){
         return{
-          code:'',
+          code: '',
           product: {},
-          id: "",
+          id: '',
           qty: 1,
           isLoading: false,
         }
     },
     methods:{
-      ...mapActions(cartStore, ["getCart","updateCart","deleteCart","deleteAllCart","addCouponCode"]),
+      ...mapActions(cartStore, ['getCart','updateCart','deleteCart','deleteAllCart','addCouponCode']),
     },
     computed: {
-      ...mapState(cartStore,["cart","total","final_total"]),
+      ...mapState(cartStore,['cart','total','final_total']),
       ...mapState(loadingStore, ['loadingStatus']),
       discount () {
         return (this.total-this.final_total)
@@ -30,11 +30,11 @@ export default {
         RouterLink
     },
     mounted(){
-        this.getCart();
-        this.isLoading = true;
+        this.getCart()
+        this.isLoading = true
         setTimeout(() => {
-        this.isLoading = false;
-      }, 500);
+        this.isLoading = false
+      }, 500)
     },
 }
 </script>
@@ -60,8 +60,7 @@ export default {
                         <tbody v-for="item in cart" :key="item.id">
                             <tr class="border-bottom border-top">
                                 <th scope="row" class="border-0 px-0 font-weight-normal py-4">
-                                    <img :src="item.product.imageUrl"
-                                        :alt="item.product.title" style="width: 72px; height: 72px; object-fit: cover;">
+                                    <img :src="item.product.imageUrl" :alt="item.product.title" style="width: 72px; height: 72px; object-fit: cover;">
                                     <p class="mb-0 fw-bold ms-lg-3 d-inline-block">{{ item.product.title }}</p>
                                 </th>
                                 <td class="border-0 align-middle px-0 " style="max-width: 160px;">

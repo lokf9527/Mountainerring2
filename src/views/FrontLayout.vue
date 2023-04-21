@@ -13,10 +13,10 @@ export default {
     RouterView,RouterLink
   },
   computed: {
-    ...mapState (cartStore, ["cart"])
+    ...mapState (cartStore, ['cart'])
   },
   methods: {
-    ...mapActions(cartStore, ["getCart"]),
+    ...mapActions(cartStore, ['getCart']),
     toggleNavCollapse() {
       this.collapse.toggle();
     },
@@ -43,8 +43,7 @@ export default {
               <li class="nav-item ms-md-2 order-lg-2 order-1">
                 <RouterLink to="/cart" class="nav-link px-2 py-lg-2">
                 <h4 class="bi bi-cart text-white position-relative"></h4>
-                <span v-if="cart.length"
-                  class="position-absolute top-0 start-100 translate-middle badge bg-danger rounded-pill mt-1">
+                <span v-if="cart.length" class="position-absolute top-0 start-100 translate-middle badge bg-danger rounded-pill mt-1">
                     {{ cart.length }}
                 </span>
               </RouterLink>
@@ -77,11 +76,8 @@ export default {
           </div>
         </div>
       </nav> 
-
-
-    
-    <RouterView></RouterView>
-
+      <RouterView></RouterView>
+    <!-- footer -->
     <div class="footer py-5 bg-primary mt-auto">
         <div class="container">
             <div class="h5">Mountaineering</div>

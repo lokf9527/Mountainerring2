@@ -2,6 +2,7 @@
 import imageUrl from '@/assets/pic/banner.png';
 import Pagination from '@/components/PaginationView.vue'
 import followsStore from '../stores/favoriteStore';
+import sweetalert from '@/utils/sweetalert';
 import { RouterLink } from "vue-router";
 import { mapActions, mapState } from 'pinia';
 const { VITE_URL, VITE_PATH }  = import.meta.env
@@ -11,42 +12,54 @@ const follow = followsStore();
 export default {
   data(){
     return {
-      imageUrl:imageUrl,
-      products:[],
+      imageUrl: imageUrl,
+      products: [],
       pagination: {},
       currentPage: 1,
       isLoading: false,
-      
-      
     }   
   },
   methods: {
     getProducts (category,page = 1) {
-        let url=`${VITE_URL}v2/api/${VITE_PATH}/products/`;
-        switch(category){
-          case"初階體驗":
-          case"中階探索":
-          case"高階冒險":
-            url=`${VITE_URL}/v2/api/${VITE_PATH}/products?category=${category}`
-            break;
-            default:
-            url=`${VITE_URL}/v2/api/${VITE_PATH}/products?page=${page}`;
+      let url=`${VITE_URL}v2/api/${VITE_PATH}/products/`
+      switch(category){
+        case"初階體驗":
+        case"中階探索":
+        case"高階冒險":
+          url=`${VITE_URL}/v2/api/${VITE_PATH}/products?category=${ category }`
+          break;
+          default:
+          url=`${VITE_URL}/v2/api/${VITE_PATH}/products?page=${ page }`
         }
-        this.$http(url)
+        this.$http.get(url)
           .then((res) => {
             this.products = res.data.products
-            follow.tempProducts(this.products);
+            follow.tempProducts(this.products)
             this.pagination = res.data.pagination
             this.isLoading = false
-        })
-    },
-    updatePage(page=1){
-          let url=`${VITE_URL}/v2/api/${VITE_PATH}/products?page=${page}`;
-          this.$http(url)
-            .then(res=>{
-            this.products=res.data.products
-            this.pagination = res.data.pagination
+          })
+          .catch((err) => {
+            const errMessage = err.response?.data?.message || '取得產品列表失敗，請稍後再試'
+            sweetalert.fire({
+            title: `${ errMessage }`,
+            icon: 'error',
             })
+          })
+        },
+    updatePage (page=1) {
+      let url=`${VITE_URL}/v2/api/${VITE_PATH}/products?page=${ page }`;
+        this.$http.get(url)
+          .then((res) => {
+            this.products = res.data.products
+            this.pagination = res.data.pagination
+          })
+          .catch((err) => {
+            const errMessage = err.response?.data?.message || '取得分頁失敗，請稍後再試'
+            sweetalert.fire({
+            title: `${ errMessage }`,
+            icon: 'error',
+            })
+          })
         },
     ...mapActions(followsStore, ['getFollows', 'toggleFollow']),
   },
@@ -61,8 +74,8 @@ export default {
 }
 
 </script>
-
 <template>
+    <!-- banner -->
     <header class="products-header" :style="{'background-image':`url(${imageUrl})`}">
         <div class="container d-flex justify-content-end align-items-center h-75 w-50 ">
             <div class="me-4">

@@ -1,5 +1,6 @@
 <script>
 import { RouterLink } from 'vue-router';
+import sweetalert from '@/utils/sweetalert';
 const { VITE_URL, VITE_PATH }  = import.meta.env
 
 export default {
@@ -17,13 +18,17 @@ export default {
       const { id } = this.$route.params;
       this.$http.get(`${VITE_URL}/v2/api/${VITE_PATH}/article/${id}`)
         .then((res) => {
-          this.isLoading = false;
-          const { article } = res.data;
-          this.article = article;
-          console.log(res)
+          this.isLoading = false
+          const { article } = res.data
+          this.article = article
         })
-        .catch(() => {
-          this.isLoading = false;
+        .catch((err) => {
+          this.isLoading = false
+          const errMessage = err.response?.data?.message || '取得文章內容失敗，請稍後再試'
+          sweetalert.fire({
+            title: `${errMessage}`,
+            icon: 'error',
+          });
         });
     },
    
@@ -35,8 +40,8 @@ export default {
 </script>
 
 <template>
+  <VueLoading v-model:active="isLoading" />
     <div class="container">
-      <VueLoading v-model:active="isLoading" />
         <div class="row justify-content-center">
         <div class="col-lg-8">
           <nav aria-label="breadcrumb" class="mt-3" >
@@ -58,4 +63,4 @@ export default {
         </div>
       </div>
     </div>
-  </template>
+</template>

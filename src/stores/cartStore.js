@@ -2,7 +2,6 @@ import { defineStore } from "pinia";
 import axios from "axios";
 import sweetalert from '@/utils/sweetalert';
 import loadingStore from '@/stores/loadingStore.js';
-
 const { VITE_URL, VITE_PATH } = import.meta.env
 const status = loadingStore();
 
@@ -19,11 +18,18 @@ const cartStore = defineStore("cartSrore", {
     getCart() {
       status.isLoading = true;
       axios.get(`${VITE_URL}/v2/api/${VITE_PATH}/cart`)
-        .then(res => {
+        .then((res) => {
           this.cart = res.data.data.carts
           this.total = res.data.data.total
           this.final_total = res.data.data.final_total
-          status.isLoading = false;
+          status.isLoading = false
+        })
+        .catch((err) => {
+          const errMessage = err.response?.data?.message || '取得購物車資料失敗，請稍後再試'
+          sweetalert.fire({
+            title: `${errMessage}`,
+            icon: 'error',
+          });
         })
     },
     addToCart(product_id, qty = 1) {
@@ -36,8 +42,8 @@ const cartStore = defineStore("cartSrore", {
       status.loadingStatus = product_id;
       axios.post(`${VITE_URL}/v2/api/${VITE_PATH}/cart`, data )
         .then((res) => {
-          status.loadingStatus = '';
-          const { message } = res.data;
+          status.loadingStatus = ''
+          const { message } = res.data
           sweetalert.fire({
             title: `${message}`,
             icon: 'success',
@@ -45,7 +51,7 @@ const cartStore = defineStore("cartSrore", {
           this.getCart() 
         })
         .catch((err) => {
-          const errMessage = err.response?.data?.message || '資料錯誤';
+          const errMessage = err.response?.data?.message || '新增商品至購物車失敗，請稍後再試'
           sweetalert.fire({
             title: `${errMessage}`,
             icon: 'error',
@@ -66,20 +72,20 @@ const cartStore = defineStore("cartSrore", {
       const data = {
         product_id: item.product.id,
         qty: item.qty,
-      };
+      }
       status.loadingStatus = item.id;
       axios.put(`${VITE_URL}/v2/api/${VITE_PATH}/cart/${item.id}`, { data })
         .then((res) => {
           this.getCart();
-          status.loadingStatus = '';
-          const { message } = res.data;
+          status.loadingStatus = ''
+          const { message } = res.data
           sweetalert.fire({
             title: `${message}`,
             icon: 'success',
           });
         })
         .catch((err) => {
-          const errMessage = err.response?.data?.message || '資料錯誤';
+          const errMessage = err.response?.data?.message || '修改商品數量失敗，請稍後再試'
           sweetalert.fire({
             title: `${errMessage}`,
             icon: 'error',
@@ -90,7 +96,7 @@ const cartStore = defineStore("cartSrore", {
       status.loadingStatus = item.id;
       axios.delete(`${VITE_URL}/v2/api/${VITE_PATH}/cart/${item.id}`)
         .then(() => {
-          status.loadingStatus = '';
+          status.loadingStatus = ''
           sweetalert.fire({
             title: '已刪除商品',
             icon: 'success',
@@ -98,7 +104,7 @@ const cartStore = defineStore("cartSrore", {
           this.getCart();
         })
         .catch((err) => {
-          const errMessage = err.response?.data?.message || '資料錯誤';
+          const errMessage = err.response?.data?.message || '刪除商品失敗，請稍後再試'
           sweetalert.fire({
             title: `${errMessage}`,
             icon: 'error',
@@ -108,7 +114,7 @@ const cartStore = defineStore("cartSrore", {
     deleteAllCart() {
       axios.delete(`${VITE_URL}/v2/api/${VITE_PATH}/carts`)
         .then(() => {
-          status.loadingStatus = '';
+          status.loadingStatus = ''
           sweetalert.fire({
             title: '已清空購物車',
             icon: 'success',
@@ -116,7 +122,7 @@ const cartStore = defineStore("cartSrore", {
           this.getCart();
         })
         .catch((err) => {
-          const errMessage = err.response?.data?.message || '資料錯誤';
+          const errMessage = err.response?.data?.message || '刪除商品失敗，請稍後再試'
           sweetalert.fire({
             title: `${errMessage}`,
             icon: 'error',
@@ -138,7 +144,7 @@ const cartStore = defineStore("cartSrore", {
           status.loadingStatus = ''
         })
         .catch((err) => {
-          const errMessage = err.response?.data?.message || '資料錯誤';
+          const errMessage = err.response?.data?.message || '優惠碼使用失敗，請稍後再試'
           sweetalert.fire({
             title: `${errMessage}`,
             icon: 'error',

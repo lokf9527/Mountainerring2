@@ -11,13 +11,12 @@ export default {
     return {
       product: {},
       relativePorduct: {},
-      id: "",
+      id: '',
       qty: 1,
     }
   },
   methods: {
     getProduct () {
-    //   const { id } = this.$route.params; 
       this.$http.get(`${VITE_URL}/v2/api/${VITE_PATH}/product/${this.id}`)
         .then(res=>{
             this.product = res.data.product
@@ -35,53 +34,44 @@ export default {
             default:
             url=`${VITE_URL}/v2/api/${VITE_PATH}/products?page=${page}`;
         }
-        this.$http(url)
+        this.$http.get(url)
           .then((res) => {
             this.products = res.data.products
-            this.pagination = res.data.pagination
         })
     },
     getRelativeProducts () {
-      const {category, id} =this.product
+      const { category, id } = this.product
       this.$http.get(`${VITE_URL}/v2/api/${VITE_PATH}/products?category=${category}`)
-        .then(res=>{
+        .then(res => {
             this.relativePorduct = res.data.products.filter((item) => item.id !== id)
         })
     },
     addOne () {
-        this.qty+=1
+      this.qty += 1
     },
     minusOne () {
-        if (this.qty>1){
-            this.qty-=1
-        }  
+      if (this.qty > 1){
+        this.qty -= 1
+      } 
     },
     toggleId(id) {
-      this.$router.push(`/product/${id}`);
-      this.id = id;
-      this.getProduct();
+      this.$router.push(`/product/${id}`)
+      this.id = id
+      this.getProduct()
     },
-    ...mapActions(cartStore, ["addToCart"]) 
+    ...mapActions(cartStore, ['addToCart']) 
   },
   components: {
     RouterLink
   },
   computed: {
-      ...mapState(loadingStore, ['loadingStatus']),
+    ...mapState(loadingStore, ['loadingStatus']),
     },
   created() {
     const { id } = this.$route.params
-    this.id = id;
-    this.getProduct();
+    this.id = id
+    this.getProduct()
   },
-//   watch: {
-//     '$route.params': {
-//       immediate: true,
-//       handler() {
-//         this.getProduct();
-//       },
-//     },
-//   },
   mounted () {
     this.getProduct()
   }

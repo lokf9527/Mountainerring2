@@ -12,12 +12,12 @@ export default {
     return {
         data: {
             user: {
-                email: "",
-                name: "",
-                tel: "",
-                address: "",
+                email: '',
+                name: '',
+                tel: '',
+                address: '',
                 },
-                message: "",
+                message: '',
         },
         isProcessing: false
         
@@ -45,7 +45,11 @@ export default {
             });
           })
         },
-        ...mapActions(cartStore, ["getCart"]) 
+    isPhone(value) {
+      const phoneNumber = /^(09)[0-9]{8}$/
+      return phoneNumber.test(value) ? true : '需要正確的電話號碼'
+        },
+    ...mapActions(cartStore, ['getCart']) 
   },    
   components: {
     RouterLink
@@ -78,7 +82,7 @@ export default {
             <div class="mb-3">
                 <label for="tel" class="form-label">收件人電話</label>
                 <v-field id="tel" name="電話" type="tel" class="form-control" :class="{ 'is-invalid': errors['電話'] }"
-                    placeholder="請輸入電話" rules="required" v-model="data.user.tel"></v-field>
+                    placeholder="請輸入電話" :rules="isPhone" v-model="data.user.tel"></v-field>
                 <error-message name="電話" class="invalid-feedback"></error-message>
             </div>
 
@@ -99,7 +103,8 @@ export default {
                 </div> 
                 <div class="text-end col">
                     <button type="submit" class="btn btn-primary" @click="() => createtOrder()" :disabled="isProcessing">
-                        送出訂單</button>
+                        送出訂單
+                    </button>
                 </div>
             </div>
         </v-form>

@@ -3,7 +3,7 @@ import imageUrl from '@/assets/pic/banner.png';
 export default {
   data(){
     return {
-      imageUrl:imageUrl,
+      imageUrl: imageUrl,
     }
   },
   methods: {
