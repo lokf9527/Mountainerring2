@@ -3,7 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-       {
+       {  
         path:'/',
         component: () => import('../views/FrontLayout.vue'),
         children: [
@@ -49,18 +49,9 @@ const router = createRouter({
         path: '/:pathMatch(.*)*',
         component: () => import('../views/NotFound.vue'),
       },
-    // {
-    //   path: '/',
-    //   name: 'home',
-    //   component: () => import('../views/AboutView.vue')
-    // },
-    // {
-    //   path: '/about',
-    //   name: 'about',
-    //   component: () => import('../views/AboutView.vue')
-      
-    // }
-  ]
+  ],
 })
-
+router.afterEach(() => {
+	window.scrollTo(0, 0);
+})
 export default router

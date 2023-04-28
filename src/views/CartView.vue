@@ -34,7 +34,7 @@ export default {
         this.isLoading = true
         setTimeout(() => {
         this.isLoading = false
-      }, 500)
+      }, 750)
     },
 }
 </script>
@@ -42,7 +42,7 @@ export default {
     <div class="container">
         <VueLoading v-model:active="isLoading" />
         <div class="mt-3" v-if="cart.length">
-            <h3 class="mt-3 mb-4">購物車</h3>
+            <h3 class="mt-4 mb-">購物車</h3>
             <div class="row">
                 <div class="col-md-8">
                     <div class="text-end">
@@ -100,23 +100,31 @@ export default {
                         <table class="table text-muted border-bottom">
                             <tbody>
                                 <tr>
-                                    <th scope="row" class="border-0 px-0 pt-4 font-weight-normal">小計</th>
-                                    <td class="text-end border-0 px-0 pt-4">NT${{ total }}</td>
+                                    <th scope="row" class="border-0 px-0 pt-3 font-weight-normal">小計</th>
+                                    <td class="text-end border-0 px-0 pt-3">NT${{ total }}</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row" class="border-0 px-0 pt-0 pb-4 font-weight-normal">付款方式</th>
-                                    <td class="text-end border-0 px-0 pt-0 pb-4">信用卡</td>
+                                    <th scope="row" class="border-0 px-0 pt-0 font-weight-normal">付款方式</th>
+                                    <td class="text-end border-0 px-0 pt-0">信用卡</td>
                                 </tr>
-                                <tr>
-                                    <th scope="row" class="border-0 px-0 pt-0 pb-4 font-weight-normal">折扣金額</th>
-                                    <td class="text-end border-0 px-0 pt-0 pb-4">NT${{ discount }}</td>
+                                <tr v-if="discount">
+                                    <th scope="row" class="border-0 px-0 pt-0  font-weight-normal">折扣金額</th>
+                                    <td class="text-end border-0 px-0 pt-0">NT${{ discount }}</td>
+                                </tr>
+                                <tr v-else>
+                                    <th scope="row" class="border-0 px-0 pt-0 pb-3 font-weight-normal">折扣金額</th>
+                                    <td class="text-end border-0 px-0 pt-0 pb-3">NT${{ discount }}</td>
+                                </tr>
+                                <tr v-if="discount">
+                                    <th scope="row" class="border-0 px-0 pt-0 pb-3  font-weight-normal"></th>
+                                    <td class="text-end text-success border-0 px-0 pt-0 pb-3" >已套用優惠券</td>
                                 </tr>
                             </tbody>
                         </table>
                         <div class="input-group mb-3 input-group-sm">
                             <input type="text" class="form-control"  placeholder="請輸入優惠碼 VIP777" v-model="code"/>
                             <div class="input-group-append">
-                                <button class="btn btn-outline-primary" style="border-top-left-radius:0%; border-bottom-left-radius:0%" type="button" @click="addCouponCode(code)" :disabled="loadingStatus === code">
+                                <button class="btn btn-outline-primary " style="border-top-left-radius:0%; border-bottom-left-radius:0%" type="button" @click="addCouponCode(code)" :disabled="loadingStatus === code">
                                     套用優惠碼
                                 </button>
                             </div>
@@ -133,54 +141,70 @@ export default {
                 <div class="row my-4">
                     <div class="col-md-3">
                         <div class="card border-0 mb-4 cardProducts">    
-                            <RouterLink to="/product/-NN0TN0Oy7quf2LBeINs"><img src="https://greathunger.com.tw/images/images/activity2_20221202152957.jpg" class="card-img-top rounded-0" alt="能高安東軍縱走" /></RouterLink>
-                            <div class="card-body text-start">
+                            <RouterLink to="/product/-NN0TN0Oy7quf2LBeINs">
+                                <img src="https://greathunger.com.tw/images/images/activity2_20221202152957.jpg" class="card-img-top rounded-0" alt="能高安東軍縱走" />
+                            </RouterLink>
+                            <RouterLink to="/product/-NN0TN0Oy7quf2LBeINs">
+                            <div class="card-body text-start text-dark">
                                 <h5>水鹿的故鄉｜能高安東軍縱走</h5> 
                                 <div class="d-flex justify-content-between">
-                                    <p class="card-text text-muted mb-0 h6">
+                                    <p class="card-text mb-0 h6">
                                         NT$12500
                                     </p>
                                 </div>
                             </div>
+                            </RouterLink>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="card border-0 mb-4 cardProducts">
-                            <RouterLink to="/product/-NKpwDun9A4lFDuSlmJL"><img src="https://greathunger.com.tw/images/images/activity8_20221114191552.jpg" class="card-img-top rounded-0" alt="戒茂斯上嘉明湖" /></RouterLink>
-                            <div class="card-body text-start">
+                            <RouterLink to="/product/-NKpwDun9A4lFDuSlmJL">
+                                <img src="https://greathunger.com.tw/images/images/activity8_20221114191552.jpg" class="card-img-top rounded-0" alt="戒茂斯上嘉明湖" />
+                            </RouterLink>
+                            <RouterLink to="/product/-NKpwDun9A4lFDuSlmJL">
+                            <div class="card-body text-start text-dark">
                                 <h5>天使的眼淚｜戒茂斯上嘉明湖</h5>
                                 <div class="d-flex justify-content-between">
-                                    <p class="card-text text-muted mb-0 h6">
+                                    <p class="card-text mb-0 h6">
                                         NT$4500
                                     </p>
                                 </div>
                             </div>
+                            </RouterLink>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="card border-0 mb-4 cardProducts">
-                            <RouterLink to="/product/-NR2IkrzZx0QBHqSbOca"><img src="https://greathunger.com.tw/images/images/activity0_20221115212626.jpg" class="card-img-top rounded-0" alt="加羅湖" /></RouterLink>
-                            <div class="card-body text-start">
+                            <RouterLink to="/product/-NR2IkrzZx0QBHqSbOca">
+                                <img src="https://greathunger.com.tw/images/images/activity0_20221115212626.jpg" class="card-img-top rounded-0" alt="加羅湖" />
+                            </RouterLink>
+                            <RouterLink to="/product/-NR2IkrzZx0QBHqSbOca">
+                            <div class="card-body text-start text-dark">
                                 <h5>散落的珍珠｜加羅湖</h5>
                                 <div class="d-flex justify-content-between">
-                                    <p class="card-text text-muted mb-0 h6">
+                                    <p class="card-text mb-0 h6">
                                         NT$4380
                                     </p>
                                 </div>
                             </div>
+                            </RouterLink>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="card border-0 mb-4 cardProducts">
-                            <RouterLink to="/product/-NR2CbYAl8zohH3Px7O1"><img src="https://greathunger.com.tw/images/activity_20221115211124.jpg" class="card-img-top rounded-0" alt="水漾森林" /></RouterLink>
-                            <div class="card-body text-start">
-                                <h5>即將消失的秘境｜水漾森林</h5>
+                            <RouterLink to="/product/-NR2CbYAl8zohH3Px7O1">
+                                <img src="https://greathunger.com.tw/images/activity_20221115211124.jpg" class="card-img-top rounded-0" alt="水漾森林" />
+                            </RouterLink>
+                            <RouterLink to="/product/-NR2CbYAl8zohH3Px7O1">
+                            <div class="card-body text-start text-dark">
+                                <h5>遠離塵嚣的仙境｜水漾森林</h5>
                                 <div class="d-flex justify-content-between">
-                                    <p class="card-text text-muted mb-0 h6">
+                                    <p class="card-text mb-0 h6">
                                         NT$4500
                                     </p>
                                 </div>
                             </div>
+                            </RouterLink>
                         </div>
                     </div>
                 </div>
@@ -194,54 +218,70 @@ export default {
                 <div class="row mt-4 mb-5">
                     <div class="col-md-3">
                         <div class="card border-0 mb-4 cardProducts">    
-                            <RouterLink to="/product/-NN0TN0Oy7quf2LBeINs"><img src="https://greathunger.com.tw/images/images/activity2_20221202152957.jpg" class="card-img-top rounded-0" alt="能高安東軍縱走" /></RouterLink>
-                            <div class="card-body text-start">
+                            <RouterLink to="/product/-NN0TN0Oy7quf2LBeINs">
+                                <img src="https://greathunger.com.tw/images/images/activity2_20221202152957.jpg" class="card-img-top rounded-0" alt="能高安東軍縱走" />
+                            </RouterLink>
+                            <RouterLink to="/product/-NN0TN0Oy7quf2LBeINs">
+                            <div class="card-body text-start text-dark">
                                 <h5>水鹿的故鄉｜能高安東軍縱走</h5> 
                                 <div class="d-flex justify-content-between">
-                                    <p class="card-text text-muted mb-0 h6">
+                                    <p class="card-text mb-0 h6">
                                         NT$12500
                                     </p>
                                 </div>
                             </div>
+                            </RouterLink>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="card border-0 mb-4 cardProducts">
-                            <RouterLink to="/product/-NKpwDun9A4lFDuSlmJL"><img src="https://greathunger.com.tw/images/images/activity8_20221114191552.jpg" class="card-img-top rounded-0" alt="戒茂斯上嘉明湖" /></RouterLink>
-                            <div class="card-body text-start">
+                            <RouterLink to="/product/-NKpwDun9A4lFDuSlmJL">
+                                <img src="https://greathunger.com.tw/images/images/activity8_20221114191552.jpg" class="card-img-top rounded-0" alt="戒茂斯上嘉明湖" />
+                            </RouterLink>
+                            <RouterLink to="/product/-NKpwDun9A4lFDuSlmJL">
+                            <div class="card-body text-start text-dark">
                                 <h5>天使的眼淚｜戒茂斯上嘉明湖</h5>
                                 <div class="d-flex justify-content-between">
-                                    <p class="card-text text-muted mb-0 h6">
+                                    <p class="card-text mb-0 h6">
                                         NT$4500
                                     </p>
                                 </div>
                             </div>
+                            </RouterLink>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="card border-0 mb-4 cardProducts">
-                            <RouterLink to="/product/-NR2IkrzZx0QBHqSbOca"><img src="https://greathunger.com.tw/images/images/activity0_20221115212626.jpg" class="card-img-top rounded-0" alt="加羅湖" /></RouterLink>
-                            <div class="card-body text-start">
+                            <RouterLink to="/product/-NR2IkrzZx0QBHqSbOca">
+                                <img src="https://greathunger.com.tw/images/images/activity0_20221115212626.jpg" class="card-img-top rounded-0" alt="加羅湖" />
+                            </RouterLink>
+                            <RouterLink to="/product/-NR2IkrzZx0QBHqSbOca">
+                            <div class="card-body text-start text-dark">
                                 <h5>散落的珍珠｜加羅湖</h5>
                                 <div class="d-flex justify-content-between">
-                                    <p class="card-text text-muted mb-0 h6">
+                                    <p class="card-text mb-0 h6">
                                         NT$4380
                                     </p>
                                 </div>
                             </div>
+                            </RouterLink>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="card border-0 mb-4 cardProducts">
-                            <RouterLink to="/product/-NR2CbYAl8zohH3Px7O1"><img src="https://greathunger.com.tw/images/activity_20221115211124.jpg" class="card-img-top rounded-0" alt="水漾森林" /></RouterLink>
-                            <div class="card-body text-start">
-                                <h5>即將消失的秘境｜水漾森林</h5>
+                            <RouterLink to="/product/-NR2CbYAl8zohH3Px7O1">
+                                <img src="https://greathunger.com.tw/images/activity_20221115211124.jpg" class="card-img-top rounded-0" alt="水漾森林" />
+                            </RouterLink>
+                            <RouterLink to="/product/-NR2CbYAl8zohH3Px7O1">
+                            <div class="card-body text-start text-dark">
+                                <h5>遠離塵嚣的仙境｜水漾森林</h5>
                                 <div class="d-flex justify-content-between">
-                                    <p class="card-text text-muted mb-0 h6">
+                                    <p class="card-text mb-0 h6">
                                         NT$4500
                                     </p>
                                 </div>
                             </div>
+                            </RouterLink>
                         </div>
                     </div>
                 </div>

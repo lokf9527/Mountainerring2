@@ -14,7 +14,8 @@ export default {
         user: {},
       },
       orderId: '',
-      isProcessing: false
+      isProcessing: false,
+      isLoading: false
     };
   },
   components: { RouterLink },
@@ -22,10 +23,13 @@ export default {
     getOrder() {
       this.$http.get(`${VITE_URL}/v2/api/${VITE_PATH}/order/${this.orderId}`)
         .then((res) => {
+          this.isLoading = false
           const { order } = res.data
           this.order = order
+          this.isLoading = false
         })
         .catch((err) => {
+          this.isLoading = false
           const errMessage = err.response?.data?.message || '取得訂單資料失敗，請稍後再試'
           sweetalert.fire({
             title: `${errMessage}`,
@@ -34,11 +38,13 @@ export default {
         })
     },
     payOrder() {
+      this.isLoading = true
       this.isProcessing = true
       this.$http
         .post(`${VITE_URL}/v2/api/${VITE_PATH}/pay/${this.orderId}`)
         .then(() => {
           this.isProcessing = false
+          this.isLoading = false
           sweetalert.fire({
             title: '付款成功',
             icon: 'success',
@@ -47,6 +53,7 @@ export default {
           this.getCart()
         })
         .catch((err) => {
+          this.isLoading = false
           const errMessage = err.response?.data?.message || '付款失敗，請稍後再試';
           sweetalert.fire({
             title: `${errMessage}`,
@@ -65,10 +72,12 @@ export default {
   mounted() {
     this.orderId = this.$route.params.orderId;
     this.getOrder();
+    this.isLoading = true;
   },
 };
 </script>
 <template>
+  <VueLoading v-model:active="isLoading" />
   <div class="container">
     <div class="my-5 mx-1 row justify-content-center w-100">
         <div class="col-md-6">
@@ -147,7 +156,7 @@ export default {
             </div>
           </form>
           <div v-if="order.is_paid" class="text-end">
-            <RouterLink to="/" class="btn btn-primary me-2 my-4">回首頁</RouterLink>
+            <RouterLink to="/products" class="btn btn-primary me-2 my-4">回商品列表</RouterLink>
           </div>
       </div>
     </div>

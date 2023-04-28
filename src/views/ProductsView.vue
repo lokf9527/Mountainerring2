@@ -90,24 +90,27 @@ export default {
         <VueLoading v-model:active="isLoading" />
         <div class="row">
             <div class="col-md-3">
-                <div class="accordion border border-bottom border-top-0 border-start-0 border-end-0 mb-3"
-                    id="accordionExample">
+                <div class="mb-3">
                     <div class="card border-0">
-                        <div class="card-header px-0 py-4 bg-white border border-bottom-0 border-top border-start-0 border-end-0 rounded-0"
-                            id="headingOne" >
+                        <div class="card-header px-0 py-4 bg-white border border-bottom-0 border-top border-start-0 border-end-0 rounded-0">
                             <div class="d-flex justify-content-between align-items-center pe-1">
                                 <h4 class="mb-0 ms-6" style="cursor: pointer" @click="() => getProducts('')">
-                                    全部商品
-                                </h4>
+                                    <a href="#" class="text-dark">全部商品</a>
+                                </h4> 
                             </div>
                         </div>
-                        <div id="collapseOne" class="collapse show " aria-labelledby="headingOne" style="cursor: pointer"
-                            data-bs-parent="#accordionExample">
+                        <div aria-labelledby="headingOne" style="cursor: pointer; border-radius:0%">
                             <div class="card-body py-0">
                                 <ul class="list-unstyled">
-                                    <li class="py-2 d-block text-muted" @click="() => getProducts('初階體驗')">初階體驗</li>
-                                    <li class="py-2 d-block text-muted" @click="() => getProducts('中階探索')">中階探索</li>
-                                    <li class="py-2 d-block text-muted" @click="() => getProducts('高階冒險')">高階冒險</li>
+                                    <li class="py-2 d-block" @click="() => getProducts('初階體驗')" >
+                                      <a href="#" class="text-dark">初階體驗</a>
+                                    </li>
+                                    <li class="py-2 d-block " @click="() => getProducts('中階探索')">
+                                      <a href="#" class="text-dark">中階探索</a>
+                                    </li>
+                                    <li class="py-2 d-block " @click="() => getProducts('高階冒險')">
+                                      <a href="#" class="text-dark">高階冒險</a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -117,22 +120,19 @@ export default {
             <div class="col-md-9">
                 <div class="row">
                     <div class="col-md-4" v-for="product in products" :key="product.id">
-                        <div class="card cardProducts border-0 rounded-0 mb-4  position-relative">
-                            <RouterLink :to="`/product/${product.id}`">
-                                <img :src="product.imageUrl"
-                                class="card-img-top rounded-0 object-fit-cover" :alt="product.title">
-                            </RouterLink>
-                            <div class="card-body text-start" >  
-                                <div class="position-absolute" style="cursor: pointer; right: 30px; top:10px" @click.prevent="() => toggleFollow(product.id)">
-                                <i class="bi bi-heart text-danger h5 position-absolute"  v-if="followIds.indexOf(product.id) === -1"></i>
+                        <RouterLink :to="`/product/${product.id}`" class="card cardProducts border-0 rounded-0 mb-4 position-relative">
+                            <img :src="product.imageUrl" class="card-img-top rounded-0 object-fit-cover" :alt="product.title">
+                            <div class="card-body text-start text-dark" >  
+                                <div class="position-absolute" style="right:30px; top:10px" @click.prevent="() => toggleFollow(product.id)">
+                                <i class="bi bi-heart text-danger h5 position-absolute" v-if="followIds.indexOf(product.id) === -1"></i>
                                 <i class="bi bi-heart-fill text-danger h5 position-absolute" v-else></i>
                                 </div>
-                                <h4 class="mt-3 h5">
-                                    <RouterLink :to="`/product/${product.id}`">{{ product.title}}</RouterLink>
+                                <h4 class="mt-3 h5 ">
+                                    <p class="text-dark">{{ product.title}}</p>
                                 </h4>
                                 <p>NT${{product.price}}</p>
                             </div>
-                        </div>
+                        </RouterLink>
                     </div>                   
                 </div>
                 <Pagination :pages="pagination" @emit-pages="updatePage"></Pagination>

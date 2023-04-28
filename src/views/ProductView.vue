@@ -10,9 +10,10 @@ export default {
   data () {
     return {
       product: {},
-      relativePorduct: {},
+      relativeProduct: {},
       id: '',
       qty: 1,
+      isLoading: false,
     }
   },
   methods: {
@@ -21,6 +22,7 @@ export default {
         .then(res=>{
             this.product = res.data.product
             this.getRelativeProducts()  
+            this.isLoading = false
         })
     },
     getProducts (category,page = 1) {
@@ -43,7 +45,7 @@ export default {
       const { category, id } = this.product
       this.$http.get(`${VITE_URL}/v2/api/${VITE_PATH}/products?category=${category}`)
         .then(res => {
-            this.relativePorduct = res.data.products.filter((item) => item.id !== id)
+            this.relativeProduct = res.data.products.filter((item) => item.id !== id)
         })
     },
     addOne () {
@@ -58,6 +60,7 @@ export default {
       this.$router.push(`/product/${id}`)
       this.id = id
       this.getProduct()
+      this.isLoading = true
     },
     ...mapActions(cartStore, ['addToCart']) 
   },
@@ -74,11 +77,13 @@ export default {
   },
   mounted () {
     this.getProduct()
+    this.isLoading = true;
   }
 }
 </script>
 
 <template>
+    <VueLoading v-model:active="isLoading" />
     <div class="container w-100">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb  px-1 mb-0 py-3">
@@ -142,16 +147,16 @@ export default {
         <h3 class="fw-bold">相關行程</h3>
         <div class="container">
             <div class="row mt-4 mb-5" >
-                <div class="col-lg-3 col-md-6" v-for="item in relativePorduct" :key="item.id">
+                <div class="col-lg-3 col-md-6" v-for="item in relativeProduct" :key="item.id">
                     <div class="card border-0 mb-4 h-100">
-                        <img :src="item.imageUrl" class="card-img-top rounded-0" :alt="item.title" style="cursor: pointer" @click.prevent="() => toggleId(item.id)" />
-                        <div class="card-body text-start">
-                        <h5>{{ item.title }}</h5> 
-                        <div class="d-flex justify-content-between">
-                            <p class="card-text text-muted mb-0 h6">
-                                NT${{ item.price }}
-                            </p>
-                        </div>
+                        <img :src="item.imageUrl" class="card-img-top rounded-0" :alt="item.title" style="cursor: pointer" @click.prevent="() => toggleId(item.id)"/>
+                        <div class="card-body text-start text-dark" style="cursor: pointer" @click.prevent="() => toggleId(item.id)">
+                            <h5>{{ item.title }}</h5> 
+                            <div class="d-flex justify-content-between">
+                                <p class="card-text mb-0 h6">
+                                    NT${{ item.price }}
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
