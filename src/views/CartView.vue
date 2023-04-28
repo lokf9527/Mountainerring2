@@ -108,20 +108,13 @@ export default {
                                     <td class="text-end border-0 px-0 pt-0">信用卡</td>
                                 </tr>
                                 <tr v-if="discount">
-                                    <th scope="row" class="border-0 px-0 pt-0  font-weight-normal">折扣金額</th>
-                                    <td class="text-end border-0 px-0 pt-0">NT${{ discount }}</td>
-                                </tr>
-                                <tr v-else>
-                                    <th scope="row" class="border-0 px-0 pt-0 pb-3 font-weight-normal">折扣金額</th>
-                                    <td class="text-end border-0 px-0 pt-0 pb-3">NT${{ discount }}</td>
-                                </tr>
-                                <tr v-if="discount">
-                                    <th scope="row" class="border-0 px-0 pt-0 pb-3  font-weight-normal"></th>
-                                    <td class="text-end text-success border-0 px-0 pt-0 pb-3" >已套用優惠券</td>
-                                </tr>
+                                    <th scope="row" class="border-0 text-success px-0 pt-0 pb-4 font-weight-normal">已使用優惠券：{{ code }}</th>
+                                    <td class="text-end text-success border-0 px-0 pt-0 pb-4">-NT${{ discount }}</td>
+                                </tr>   
                             </tbody>
                         </table>
-                        <div class="input-group mb-3 input-group-sm">
+                        <div v-if="discount"></div>
+                        <div class="input-group mb-3 input-group-sm" v-else>
                             <input type="text" class="form-control"  placeholder="請輸入優惠碼 VIP777" v-model="code"/>
                             <div class="input-group-append">
                                 <button class="btn btn-outline-primary " style="border-top-left-radius:0%; border-bottom-left-radius:0%" type="button" @click="addCouponCode(code)" :disabled="loadingStatus === code">
