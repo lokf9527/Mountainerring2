@@ -75,9 +75,10 @@ export default {
                 <div class="row">
                     <div class="col-md-3" v-for="item in followList" :key="item.id">
                         <div class="card cardProducts border-0 rounded-0 mb-4  position-relative">
-                                <RouterLink :to="`/product/${item.id}`"><img :src="item.imageUrl"
-                                class="card-img-top rounded-0 object-fit-cover" :alt="item.title"></RouterLink>
-                            <RouterLink :to="`/product/${item.id}`" class="card-body text-start" >  
+                            <RouterLink :to="`/product/${item.id}`">
+                                <img :src="item.imageUrl" class="card-img-top rounded-0 object-fit-cover" :alt="item.title">
+                            </RouterLink>
+                            <RouterLink :to="`/product/${item.id}`" class="card-body text-start text-dark" >  
                                 <div class="position-absolute" style="cursor: pointer; right: 30px; top:10px" @click.prevent="() => toggleFollow(item.id)">
                                 <i class="bi bi-heart text-danger h5 position-absolute"  v-if="followIds.indexOf(item.id) === -1"></i>
                                 <i class="bi bi-heart-fill text-danger h5 position-absolute" v-else></i>
@@ -86,7 +87,7 @@ export default {
                                 <p>NT${{item.price}}</p>
                             </RouterLink>
                             <div class="card-footer d-grid gap-2 border-top-0 px-0 py-0">
-                                <button type="button" class="text-nowrap btn btn-dark w-100 py-2" @click="() => addToCart(item.id,qty)" :disabled="loadingStatus === item.id">
+                                <button type="button" class="text-nowrap btn btn-primary w-100 py-2" style="border-radius:0%" @click="() => addToCart(item.id,qty)" :disabled="loadingStatus === item.id">
                             <i class="spinner-border spinner-border-sm me-3" v-if="loadingStatus === item.id"></i>
                             <span>加入購物車</span>
                                 </button>
@@ -104,7 +105,7 @@ export default {
                 <h4 class="fw-bold mt-5">你可能會有興趣 ...</h4>
                 <div class="row mt-4 mb-5">
                     <div class="col-md-3">
-                        <div class="card border-0 mb-4 cardProducts">    
+                        <div class="card border-0 mb-4 cardProducts" style="border-radius:0%">    
                             <RouterLink to="/product/-NN0TN0Oy7quf2LBeINs">
                                 <img src="https://greathunger.com.tw/images/images/activity2_20221202152957.jpg" class="card-img-top rounded-0" alt="能高安東軍縱走" />
                             </RouterLink>
@@ -121,7 +122,7 @@ export default {
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="card border-0 mb-4 cardProducts">
+                        <div class="card border-0 mb-4 cardProducts" style="border-radius:0%">
                             <RouterLink to="/product/-NKpwDun9A4lFDuSlmJL">
                                 <img src="https://greathunger.com.tw/images/images/activity8_20221114191552.jpg" class="card-img-top rounded-0" alt="戒茂斯上嘉明湖" />
                             </RouterLink>
@@ -138,7 +139,7 @@ export default {
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="card border-0 mb-4 cardProducts">
+                        <div class="card border-0 mb-4 cardProducts" style="border-radius:0%">
                             <RouterLink to="/product/-NR2IkrzZx0QBHqSbOca">
                                 <img src="https://greathunger.com.tw/images/images/activity0_20221115212626.jpg" class="card-img-top rounded-0" alt="加羅湖" />
                             </RouterLink>
@@ -155,7 +156,7 @@ export default {
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="card border-0 mb-4 cardProducts">
+                        <div class="card border-0 mb-4 cardProducts" style="border-radius:0%">
                             <RouterLink to="/product/-NR2CbYAl8zohH3Px7O1">
                                 <img src="https://greathunger.com.tw/images/activity_20221115211124.jpg" class="card-img-top rounded-0" alt="水漾森林" />
                             </RouterLink>

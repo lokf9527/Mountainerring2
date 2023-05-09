@@ -148,7 +148,7 @@ export default {
         <div class="container">
             <div class="row mt-4 mb-5" >
                 <div class="col-lg-3 col-md-6" v-for="item in relativeProduct" :key="item.id">
-                    <div class="card border-0 mb-4 h-100">
+                    <div class="card cardProducts border-0 mb-4 h-100" style="border-radius:0%">
                         <img :src="item.imageUrl" class="card-img-top rounded-0" :alt="item.title" style="cursor: pointer" @click.prevent="() => toggleId(item.id)"/>
                         <div class="card-body text-start text-dark" style="cursor: pointer" @click.prevent="() => toggleId(item.id)">
                             <h5>{{ item.title }}</h5> 

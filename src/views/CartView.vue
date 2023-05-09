@@ -42,13 +42,13 @@ export default {
     <div class="container">
         <VueLoading v-model:active="isLoading" />
         <div class="mt-3" v-if="cart.length">
-            <h3 class="mt-4 mb-">購物車</h3>
+            <h3 class="mt-4">購物車</h3>
             <div class="row">
                 <div class="col-md-8">
                     <div class="text-end">
                     <button class="btn btn-outline-danger" type="button" @click="() => deleteAllCart()">清空購物車</button>
                     </div>
-                    <table class="table">
+                    <table class="table text-muted">
                         <thead>
                             <tr>
                                 <th scope="col" class="border-0 ps-0">商品資料</th>
@@ -133,7 +133,7 @@ export default {
             <h4 class="fw-bold mt-1">你可能會有興趣 ...</h4>
                 <div class="row my-4">
                     <div class="col-md-3">
-                        <div class="card border-0 mb-4 cardProducts">    
+                        <div class="card border-0 mb-4 cardProducts" style="border-radius:0%">    
                             <RouterLink to="/product/-NN0TN0Oy7quf2LBeINs">
                                 <img src="https://greathunger.com.tw/images/images/activity2_20221202152957.jpg" class="card-img-top rounded-0" alt="能高安東軍縱走" />
                             </RouterLink>
@@ -150,7 +150,7 @@ export default {
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="card border-0 mb-4 cardProducts">
+                        <div class="card border-0 mb-4 cardProducts" style="border-radius:0%">
                             <RouterLink to="/product/-NKpwDun9A4lFDuSlmJL">
                                 <img src="https://greathunger.com.tw/images/images/activity8_20221114191552.jpg" class="card-img-top rounded-0" alt="戒茂斯上嘉明湖" />
                             </RouterLink>
@@ -167,7 +167,7 @@ export default {
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="card border-0 mb-4 cardProducts">
+                        <div class="card border-0 mb-4 cardProducts" style="border-radius:0%">
                             <RouterLink to="/product/-NR2IkrzZx0QBHqSbOca">
                                 <img src="https://greathunger.com.tw/images/images/activity0_20221115212626.jpg" class="card-img-top rounded-0" alt="加羅湖" />
                             </RouterLink>
@@ -184,7 +184,7 @@ export default {
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="card border-0 mb-4 cardProducts">
+                        <div class="card border-0 mb-4 cardProducts" style="border-radius:0%">
                             <RouterLink to="/product/-NR2CbYAl8zohH3Px7O1">
                                 <img src="https://greathunger.com.tw/images/activity_20221115211124.jpg" class="card-img-top rounded-0" alt="水漾森林" />
                             </RouterLink>
@@ -210,7 +210,7 @@ export default {
                 <h4 class="fw-bold mt-5">你可能會有興趣 ...</h4>
                 <div class="row mt-4 mb-5">
                     <div class="col-md-3">
-                        <div class="card border-0 mb-4 cardProducts">    
+                        <div class="card border-0 mb-4 cardProducts" style="border-radius:0%">    
                             <RouterLink to="/product/-NN0TN0Oy7quf2LBeINs">
                                 <img src="https://greathunger.com.tw/images/images/activity2_20221202152957.jpg" class="card-img-top rounded-0" alt="能高安東軍縱走" />
                             </RouterLink>
@@ -227,7 +227,7 @@ export default {
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="card border-0 mb-4 cardProducts">
+                        <div class="card border-0 mb-4 cardProducts" style="border-radius:0%">
                             <RouterLink to="/product/-NKpwDun9A4lFDuSlmJL">
                                 <img src="https://greathunger.com.tw/images/images/activity8_20221114191552.jpg" class="card-img-top rounded-0" alt="戒茂斯上嘉明湖" />
                             </RouterLink>
@@ -244,7 +244,7 @@ export default {
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="card border-0 mb-4 cardProducts">
+                        <div class="card border-0 mb-4 cardProducts" style="border-radius:0%">
                             <RouterLink to="/product/-NR2IkrzZx0QBHqSbOca">
                                 <img src="https://greathunger.com.tw/images/images/activity0_20221115212626.jpg" class="card-img-top rounded-0" alt="加羅湖" />
                             </RouterLink>
@@ -261,7 +261,7 @@ export default {
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="card border-0 mb-4 cardProducts">
+                        <div class="card border-0 mb-4 cardProducts" style="border-radius:0%">
                             <RouterLink to="/product/-NR2CbYAl8zohH3Px7O1">
                                 <img src="https://greathunger.com.tw/images/activity_20221115211124.jpg" class="card-img-top rounded-0" alt="水漾森林" />
                             </RouterLink>

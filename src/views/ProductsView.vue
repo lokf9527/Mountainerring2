@@ -91,8 +91,8 @@ export default {
         <div class="row">
             <div class="col-md-3">
                 <div class="mb-3">
-                    <div class="card border-0">
-                        <div class="card-header px-0 py-4 bg-white border border-bottom-0 border-top border-start-0 border-end-0 rounded-0">
+                    <div class="card border-0" style="border-radius:0%">
+                        <div class="card-header px-0 py-4 bg-white border border-bottom-0 border-top border-start-0 border-end-0 rounded-0" >
                             <div class="d-flex justify-content-between align-items-center pe-1">
                                 <h4 class="mb-0 ms-6" style="cursor: pointer" @click="() => getProducts('')">
                                     <a href="#" class="text-dark">全部商品</a>
@@ -120,9 +120,11 @@ export default {
             <div class="col-md-9">
                 <div class="row">
                     <div class="col-md-4" v-for="product in products" :key="product.id">
-                        <RouterLink :to="`/product/${product.id}`" class="card cardProducts border-0 rounded-0 mb-4 position-relative">
-                            <img :src="product.imageUrl" class="card-img-top rounded-0 object-fit-cover" :alt="product.title">
-                            <div class="card-body text-start text-dark" >  
+                        <div class="card cardProducts border-0 rounded-0 mb-4 position-relative">
+                            <RouterLink :to="`/product/${product.id}`">
+                              <img :src="product.imageUrl" class="card-img-top rounded-0 object-fit-cover" :alt="product.title">
+                            </RouterLink>
+                            <RouterLink :to="`/product/${product.id}`" class="card-body text-start text-dark" >  
                                 <div class="position-absolute" style="right:30px; top:10px" @click.prevent="() => toggleFollow(product.id)">
                                 <i class="bi bi-heart text-danger h5 position-absolute" v-if="followIds.indexOf(product.id) === -1"></i>
                                 <i class="bi bi-heart-fill text-danger h5 position-absolute" v-else></i>
@@ -131,8 +133,8 @@ export default {
                                     <p class="text-dark">{{ product.title}}</p>
                                 </h4>
                                 <p>NT${{product.price}}</p>
-                            </div>
-                        </RouterLink>
+                            </RouterLink>
+                        </div>
                     </div>                   
                 </div>
                 <Pagination :pages="pagination" @emit-pages="updatePage"></Pagination>
