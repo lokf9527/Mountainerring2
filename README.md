@@ -5,7 +5,7 @@ This template should help get you started developing with Vue 3 in Vite.
 
 ## 實際畫面
 
-圖片一![GITHUB]( [圖片網址](https://github.com/lokf9527/Mountainerring2/blob/main/src/assets/pic/Mountainerring-01.png) "圖片名稱")
+圖片一![GITHUB](https://github.com/lokf9527/Mountainerring2/blob/main/src/assets/pic/Mountainerring-01.png "圖片名稱")
 圖片二
 圖片三
 
