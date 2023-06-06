@@ -28,3 +28,8 @@ This template should help get you started developing with Vue 3 in Vite.
 * Layout 使用 `Bootstrap 5` 結合 `SCSS` 切版
 * icon 使用 `Bootstrap icons`
 * 開發後台管理系統
+
+## 聯絡我
+
+你可以透過以下方式與我聯絡
+* Email.com : qazedc320@gmail.com
