@@ -16,7 +16,7 @@ This template should help get you started developing with Vue 3 in Vite.
 * 商品收藏功能：收藏列表、刪除
 * 文章專欄：文章列表、文章內容
 
-## Project Setup
+## 使用技術
 
 ```sh
 npm install
