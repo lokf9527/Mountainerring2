@@ -1,3 +1,4 @@
+![GITHUB](https://github.com/lokf9527/Mountainerring2/blob/main/src/assets/pic/Mountainerring-01.png "圖片名稱")
 # Ｍountainerring
 
 > 商業登山電商網站
@@ -5,7 +6,6 @@
 
 ## 實際畫面
 
-![GITHUB](https://github.com/lokf9527/Mountainerring2/blob/main/src/assets/pic/Mountainerring-01.png "圖片名稱")
 ![GITHUB](https://github.com/lokf9527/Mountainerring2/blob/main/src/assets/pic/Mountainerring-02.png "圖片名稱")
 ![GITHUB](https://github.com/lokf9527/Mountainerring2/blob/main/src/assets/pic/Mountainerring-03.png "圖片名稱")
 
