@@ -14,8 +14,7 @@ This template should help get you started developing with Vue 3 in Vite.
 * 電商展示：首頁、商品列表、商品介紹
 * 購物車：刪除、修改商品數量、優惠券、結帳
 * 商品收藏功能：收藏列表、刪除
-* 關於我們：品牌介紹
-* 最新消息：消息列表、消息內容
+* 文章專欄：文章列表、文章內容
 
 ## Project Setup
 
