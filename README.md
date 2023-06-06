@@ -18,7 +18,7 @@ This template should help get you started developing with Vue 3 in Vite.
 
 ## 使用技術
 
-* Vue 3 Options API
+* ‘Vue 3 Options API’
 * Vite 環境建置
 * Vue Component 元件拆分使用
 * 引入 Vue Router 建構路由
