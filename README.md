@@ -1,7 +1,7 @@
 # mountainerring
 
 This template should help get you started developing with Vue 3 in Vite.
-*線上觀看連結Demo
+* 線上觀看連結Demo
 
 ## Recommended IDE Setup
 
