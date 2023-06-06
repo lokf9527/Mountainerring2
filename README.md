@@ -1,35 +1,35 @@
 # mountainerring
 
 This template should help get you started developing with Vue 3 in Vite.
+*  [線上觀看連結Demo](https://lokf9527.github.io/Mountainerring2/)
 
-## Recommended IDE Setup
+## 實際畫面
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+圖片一
+圖片二
+圖片三
 
-## Customize configuration
+## 網站功能
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+* 電商展示：首頁、商品列表、商品介紹
+* 購物車：刪除、修改商品數量、優惠券、結帳
+* 商品收藏功能：收藏列表、刪除
+* 文章專欄：文章列表、文章內容
 
-## Project Setup
+## 使用技術
 
-```sh
-npm install
-```
+* `Vue 3 Options API`
+* `Vite` 環境建置
+* 引入 `Vue Router` 建構路由
+* 引入 `Vue Axios` 串接 `RESTful API` 資料
+* 引入 `Vee Validation` 結帳表單驗證
+* 透過 `Pinia` 傳遞跨元件資料
+* 使用 `localStorage` 製作商品收藏功能
+* Layout 使用 `Bootstrap 5` 結合 `SCSS` 切版
+* icon 使用 `Bootstrap icons`
+* 開發後台管理系統
 
-### Compile and Hot-Reload for Development
+## 聯絡我
 
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+你可以透過以下方式與我聯絡
+* Email.com : qazedc320@gmail.com
