@@ -22,14 +22,13 @@ This template should help get you started developing with Vue 3 in Vite.
 * `Vite` 環境建置
 * 引入 `Vue Router` 建構路由
 * 引入 `Vue Axios` 串接 `RESTful API` 資料
-* 引入 `Vee Validation` 結帳表單驗證
+* 引入 `Vee Validation` 進行表單驗證
 * 透過 `Pinia` 傳遞跨元件資料
 * 使用 `localStorage` 製作商品收藏功能
 * Layout 使用 `Bootstrap 5` 結合 `SCSS` 切版
 * icon 使用 `Bootstrap icons`
-* 開發後台管理系統
 
 ## 聯絡我
 
 你可以透過以下方式與我聯絡
-* Email.com : qazedc320@gmail.com
+* Email : qazedc320@gmail.com
